@@ -18,6 +18,7 @@ A markdown file where we can explain related concepts to the project and hints.
       *  secondary_structure.py: explanation of dssp. Dssp outputs ***relative ASA*** (if it is higher than a threshold then it is exposed). There is the code for calculating ***phi-psi angles***.
       * radius_gyration.py: TO-DO
       * superposition_fragments.py: TO-DO
+  3. Introduction to IDPs and NMR.
 * **Lecture 16**: 
   1. TM score and TM align: not needed for the project.
   2. Code:
