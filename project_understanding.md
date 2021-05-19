@@ -12,17 +12,19 @@ A markdown file where we can explain related concepts to the project and hints.
 * **Relative accessible surface area or relative solvent accessibility**: a measure of residue solvent exposure.
 
 ## Directly related lectures
-* **Lecture 15**: 
+* **Lecture 15**: Structural features for non-globular proteins
   1. Explanation of project requirements. Read articles. Idea of the project: pairwise comparison between the different ensebles in PED. We should provide biological considerations about the ensemble in the report (second article!). Visualize one ensemble in pymol and let the user understand what is happening.
   2. Code:
       *  secondary_structure.py: explanation of dssp. Dssp outputs ***relative ASA*** (if it is higher than a threshold then it is exposed). There is the code for calculating ***phi-psi angles***.
-      * radius_gyration.py: TO-DO
-      * superposition_fragments.py: TO-DO
+      * radius_gyration.py: fully extended (hypothetic) proteins have very high radius of gyration (it is the maximum spread). By analising the radius of gyration we can analyse if the protein is folded or not.
+      * superposition_fragments.py: sliding window over the sequence to compare fragments. In this case, the profesor compares all models against the first model. He extracts the alpha carbon coordinates. Calculation of RSMD per fragment and average.
+      * * superposition_fragments_exercise.py: it rotatates and translates the entire protein to calculate the RSMD.
   3. Introduction to IDPs and NMR.
 * **Lecture 16**: 
   1. TM score and TM align: not needed for the project.
   2. Code:
-      * pymol_states.py: TO-DO
-      * pymol_lines.py: TO-DO
+      * pymol_states.py: same code as superposition_fragments.py but adding pymol api. The teacher explains how to run the Pymol UX through python, displaying a protein in cartoon stile without water molecules. Then he uses a colormap to display RSMD. One of the goals of the project is to identify regions that move more. Also, sample a subset of states and visualize them altogether.
+      * pymol_lines.py: select and color residues, and other comands. 
+  3. Brief explanation of task 1 b.
 * **Lecture 17**: theory related to IDP.
 * **Lecture 18**: theory related to IDP.
