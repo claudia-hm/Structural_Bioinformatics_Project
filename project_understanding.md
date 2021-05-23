@@ -28,3 +28,8 @@ A markdown file where we can explain related concepts to the project and hints.
   3. Brief explanation of task 1 b.
 * **Lecture 17**: theory related to IDP.
 * **Lecture 18**: theory related to IDP.
+
+## Doubts
+* Not so so sure where to calculate the features: single conformation features in Task 1 and ensembles features in task 2? See text above input-output.
+* How to compute the graph? *The similarity is calculated combining all feature values (see below).* --> Not included
+* It is okay to use Jupyter Notebooks for testing but I think that the professors wants us to create py files that he can run on the terminal (*Argparse and Logging modules*
