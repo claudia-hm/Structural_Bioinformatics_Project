@@ -82,16 +82,17 @@ def get_distance_matrix(structure, seq_sep=6):
 
     # Calculate the distance matrix
     distances = []
-    for residue1 in structure:
-        if residue1.id[0] == " ":  # Exclude hetero/water residues
-            row = []
-            for residue2 in structure:
-                if residue2.id[0] == " ":  # Exclude hetero/water residues
-                    if abs(residue1.id[1] - residue2.id[1]) >= seq_sep:
-                        row.append(residue1["CA"] - residue2["CA"])
-                    else:
-                        row.append(None)
-            distances.append(row)
+    for chain in structure:
+        for residue1 in chain:
+            if residue1.id[0] == " ":  # Exclude hetero/water residues
+                row = []
+                for residue2 in chain:
+                    if residue2.id[0] == " ":  # Exclude hetero/water residues
+                        if abs(residue1.id[1] - residue2.id[1]) >= seq_sep:
+                            row.append(residue1["CA"] - residue2["CA"])
+                        else:
+                            row.append(None)
+                distances.append(row)
 
     return distances
 
@@ -140,7 +141,7 @@ def main():
 
 
     with open("{}_single_conformation_features.txt".format(pdb_id),'w') as outfile:
-        json.dump(features, outfile)
+        json.dump(str(features), outfile)
 
 
 
