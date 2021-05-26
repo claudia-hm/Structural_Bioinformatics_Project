@@ -27,12 +27,28 @@ def get_radius_of_gyration(structure):
 
 def get_relative_asas(structure):
     rASA = np.zeros(N)
-    dssp = DSSP(structure, pdb_path)  # WARNING Check the path of mkdssp
+    dssp = DSSP(structure, pdb_path, dssp="binx/dssp-2.3.0/mkdssp")  # WARNING Check the path of mkdssp
     i=0
     for ss in dssp:
         rASA[i]=ss[3]
         i = i+1
     return rASA
+
+def get_relative_asas2(structure):
+  hse = HSExposureCB(structure)
+  rASA = np.zeros(N)
+  i=0
+  for chain in structure:
+    for residue in chain:
+        try:
+            rASA[i]=hse[(chain.id, residue.id)][0]
+            i=i+1
+        except:
+            print(residue)
+  max=np.max(rASA)
+  min=np.min(rASA)
+  rASA= 1 - (rASA-min)/(max-min)
+  return rASA
 
 def get_secondary_structure(structure):
     rama_ss_ranges = [(-180, -180, 80, 60, 'E', 'blue'),
@@ -77,7 +93,7 @@ def get_distance_matrix(structure, seq_sep=6):
                         row.append(None)
             distances.append(row)
 
-    return np.array(distances, dtype=float)
+    return distances
 
 
 def get_single_conformation_features(structure):
@@ -99,7 +115,7 @@ def get_ensemble_dimension(ensemble):
                 print(residue.id)
     return N,M
 
-def main(pdb_path):
+def main():
     pdb_id = os.path.basename(pdb_path)[:-4]
     ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
     logging.basicConfig(filename="task1.log", encoding ='utf-8', level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
@@ -107,18 +123,26 @@ def main(pdb_path):
     # logging.warning("aaaaah")
     logging.info("Program start")
     # logging.error("bbbbbb")
-
+    global N
+    global M
     N,M = get_ensemble_dimension(ensemble)
     rg = np.zeros(M)
     features = {}
-
+    logging.info("Radius of gyration")
     for i in range(M):
         id = "{}_{}".format(pdb_id,i)
         features[id] = {}
         features[id]['radius_of_giration'] = get_radius_of_gyration(ensemble[i])
+        features[id]['relative_asas'] = list(get_relative_asas(ensemble[i]))
+        features[id]['secondary_structure'] = list(get_secondary_structure(ensemble[i]))
+        features[id]['distance_matrix'] = get_distance_matrix(ensemble[i])
 
 
-    logging.info("Radius of gyration")
+
+    with open("{}_single_conformation_features.txt".format(pdb_id),'w') as outfile:
+        json.dump(features, outfile)
+
+
 
 
 if __name__ == "__main__":
@@ -126,7 +150,7 @@ if __name__ == "__main__":
     import logging
     import json
     import numpy as np
-    from Bio.PDB import PDBList, Superimposer, is_aa, PPBuilder
+    from Bio.PDB import PDBList, Superimposer, is_aa, PPBuilder, HSExposureCB
     from Bio.PDB.DSSP import DSSP
     from Bio.PDB.PDBParser import PDBParser
     import requests
@@ -135,9 +159,12 @@ if __name__ == "__main__":
     import argparse
     import os
 
+    N,M = 0,0
+
     parser = argparse.ArgumentParser(description='Code for task 1 Structural Bioinformatics Project')
     parser.add_argument('file', metavar='F', nargs=1,
                         help='PDB file path')
 
     args = parser.parse_args()
-    main(args.file[0])
+    pdb_path = args.file[0]
+    main()
