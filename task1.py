@@ -3,9 +3,6 @@ def get_radius_of_gyration(structure):
     '''
     Calculates the Radius of Gyration (Rg) of a protein in Angstroms.
     Does not use mass and assume heavy atoms have the same mass.
-
-    https://en.wikipedia.org/wiki/Radius_of_gyration  (formula considering mass)
-    https://link.springer.com/article/10.1134/S0026893308040195  (formula without mass)
     '''
 
     # Heavy atoms coordinates
@@ -119,11 +116,7 @@ def get_ensemble_dimension(ensemble):
 def main():
     pdb_id = os.path.basename(pdb_path)[:-4]
     ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
-    logging.basicConfig(filename="task1.log", encoding ='utf-8', level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
-    # logging.debug(pdb_id)
-    # logging.warning("aaaaah")
-    logging.info("Program start")
-    # logging.error("bbbbbb")
+
     global N
     global M
     N,M = get_ensemble_dimension(ensemble)
@@ -140,7 +133,7 @@ def main():
 
 
 
-    with open("{}_single_conformation_features.txt".format(pdb_id),'w') as outfile:
+    with open("{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
         json.dump(str(features), outfile)
 
 
@@ -161,6 +154,8 @@ if __name__ == "__main__":
     import os
 
     N,M = 0,0
+    logging.basicConfig(filename="task1.log", encoding='utf-8', level=logging.INFO,
+                        format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
 
     parser = argparse.ArgumentParser(description='Code for task 1 Structural Bioinformatics Project')
     parser.add_argument('file', metavar='F', nargs=1,
@@ -168,4 +163,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     pdb_path = args.file[0]
+    logging.info("Program start")
     main()
