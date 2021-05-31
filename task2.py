@@ -4,7 +4,6 @@
 
 
 
-
 '''1. Ensembles features (multiple conformations)'''
 def get_radius_of_gyration(data):
     global M
@@ -62,17 +61,55 @@ def get_ensemble_features(data):
 
     return rg,mrasa, md, stdev_d
 
+"2. A dendrogram/heatmap representing the distance (global score) between ensembles."
+def compute_global_score(med_mat_1, med_mat_2):
+    ens_dRSMD = np.sqrt((1/N)*np.sum(np.power(med_mat_1 - med_mat_2,2))) #FORMULA 4 LAZAR
+    return ens_dRSMD
+
+def heatmap(pdb_ids, med_mats):
+    heatmap = np.zeros((len(pdb_ids), len(pdb_ids)))
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(len(pdb_ids)):
+            #print("computing score between: ", ens1, ens2 )
+            heatmap[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(heatmap)
+
+    # We want to show all ticks...
+    ax.set_xticks(np.arange(len(pdb_ids)))
+    ax.set_yticks(np.arange(len(pdb_ids)))
+    # ... and label them with the respective list entries
+    ax.set_xticklabels(pdb_ids)
+    ax.set_yticklabels(pdb_ids)
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+             rotation_mode="anchor")
+
+    # Loop over data dimensions and create text annotations.
+    for i in range(len(pdb_ids)):
+        for j in range(len(pdb_ids)):
+            text = ax.text(j, i, "%.2f" %heatmap[i, j],
+                           ha="center", va="center", color="w")
+
+    ax.set_title("Global score between ensembles")
+    fig.tight_layout()
+    ensemble_string = "_".join(pdb_ids)
+    plt.savefig("features/task2_heatmap_{}.png".format(ensemble_string))
+
 def main():
     pdb_ids = []
     global M
+    median_distance_mats = []
     for file in feature_files:
         pdb_ids.append(os.path.basename(file)[:-34]) # get pdb_id from file name
         with open(file) as f:
             data = json.load(f)
             M = len(data.keys())
-            get_ensemble_features(data)
-
-
+            rg,mrasa, md, stdev_d = get_ensemble_features(data)
+            median_distance_mats.append(md)
+    heatmap(pdb_ids, median_distance_mats)
 
 
 
