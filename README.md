@@ -25,3 +25,19 @@
 conformations.
 - [x] b. Global score heatmap
 - [ ] c. Plot showing features values along sequence positions
+
+### Commands for running py files
+
+#### Task 1
+python task1.py *pdb file*
+  
+For example:
+  
+python task1.py data/PED00153e010.pdb
+
+#### Task 2
+python task1.py *task1 feature files to compare*
+  
+For example:
+  
+python task2.py PED00153e007_single_conformation_features.json PED00153e008_single_conformation_features.json PED00153e009_single_conformation_features.json PED00153e010_single_conformation_features.json PED00153e011_single_conformation_features.json
