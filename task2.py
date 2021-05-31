@@ -1,14 +1,33 @@
 #!/usr/bin/env python
 
-def main():
+'''0. Utile functions'''
 
-    ## not working
-    '''
+
+
+
+'''1. Ensembles features (multiple conformations)'''
+def get_radius_of_gyration(data):
+    global M
+    radius_gyration_vec = np.zeros(M)
+    for i, key in enumerate(data):
+        radius_gyration_vec[i] = data[key]["radius_of_giration"]
+    return radius_gyration_vec
+
+
+def get_ensemble_features(data):
+    rg = get_radius_of_gyration(data)
+
+    return rg
+
+def main():
+    pdb_ids = []
+    global M
     for file in feature_files:
+        pdb_ids.append(os.path.basename(file)[:-34]) # get pdb_id from file name
         with open(file) as f:
             data = json.load(f)
-            print(data.keys())
-    '''
+            M = len(data.keys())
+            print(get_ensemble_features(data))
 
 
 
