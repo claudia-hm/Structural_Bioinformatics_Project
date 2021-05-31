@@ -4,6 +4,7 @@
 !apt-get install dssp
 
 ### Checklist
+This checklist refers to the python files task1.py, task2.p. Only mark as check when definitive working version is available in these python files.
 
 #### Task1
 - [x] a. Single conformation features
