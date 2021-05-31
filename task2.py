@@ -13,11 +13,25 @@ def get_radius_of_gyration(data):
         radius_gyration_vec[i] = data[key]["radius_of_giration"]
     return radius_gyration_vec
 
+def get_median_distance(data):
+    global N
+    N = len(data[list(data.keys())[0]]['distance_matrix'])
+
+    med_distance = np.zeros((N, N))
+    for i in range(N):  # for
+        for j in range(N):  # for every conformation
+            distances = []
+            for key in data:
+                distances.append(data[key]["distance_matrix"][i][j])
+            med_distance[i, j] = np.median(distances)
+    return med_distance
+
 
 def get_ensemble_features(data):
+    md = get_median_distance(data)
     rg = get_radius_of_gyration(data)
-
-    return rg
+    print(md)
+    return rg, md
 
 def main():
     pdb_ids = []
@@ -27,7 +41,7 @@ def main():
         with open(file) as f:
             data = json.load(f)
             M = len(data.keys())
-            print(get_ensemble_features(data))
+            get_ensemble_features(data)
 
 
 
