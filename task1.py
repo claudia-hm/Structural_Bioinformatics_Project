@@ -78,7 +78,7 @@ def get_secondary_structure(structure):
                             break
     return ss
 
-def get_distance_matrix(structure, seq_sep=6):
+def get_distance_matrix(structure, seq_sep=0):
 
     # Calculate the distance matrix
     distances = []
@@ -91,7 +91,7 @@ def get_distance_matrix(structure, seq_sep=6):
                         if abs(residue1.id[1] - residue2.id[1]) >= seq_sep:
                             row.append(residue1["CA"] - residue2["CA"])
                         else:
-                            row.append(0)
+                            row.append(None)
                 distances.append(row)
 
     return np.array(distances).astype(np.float64)

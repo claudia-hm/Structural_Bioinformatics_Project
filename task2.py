@@ -41,15 +41,11 @@ def get_stdev_distance(data):
 
 def get_ensemble_features(data):
 
-    rg = get_radius_of_gyration(data)
-    md = get_median_distance(data)
-    stdev_d = get_stdev_distance(data)
+    rg = get_radius_of_gyration(data) # 1. Radius of gyration for each conformation in the ensemble.
 
-    fig, ax = plt.subplots(figsize=(6, 6))
-    im = ax.imshow(stdev_d)
-    fig.colorbar(im, fraction=0.03, pad=0.05)
-    plt.title("Standard deviation of the distance of each pair of equivalent positions across ensemble conformations")
-    plt.show()
+    md = get_median_distance(data)  # 5. Median distance of each pair of equivalent positions across ensemble conformations.
+    stdev_d = get_stdev_distance(data)  # 6. Standard deviation of the distance of each pair of equivalent positions across ensemble conformations.
+
 
     print(stdev_d)
     return rg, md
