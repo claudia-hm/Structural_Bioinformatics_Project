@@ -13,6 +13,18 @@ def get_radius_of_gyration(data):
         radius_gyration_vec[i] = data[key]["radius_of_giration"]
     return radius_gyration_vec
 
+def get_median_asa(data):
+    global N
+    N = len(data[list(data.keys())[0]]['relative_asas'])
+
+    med_rasa = np.zeros(N)
+    for i in range(N):  # for
+        rasas = []
+        for key in data:
+            rasas.append(data[key]["relative_asas"][i])
+        med_rasa[i]= np.median(rasas)
+    return med_rasa
+
 def get_median_distance(data):
     global N
     N = len(data[list(data.keys())[0]]['distance_matrix'])
@@ -25,6 +37,8 @@ def get_median_distance(data):
                 distances.append(data[key]["distance_matrix"][i][j])
             med_distance[i, j] = np.median(distances)
     return med_distance
+
+
 
 def get_stdev_distance(data):
     global N
@@ -42,13 +56,11 @@ def get_stdev_distance(data):
 def get_ensemble_features(data):
 
     rg = get_radius_of_gyration(data) # 1. Radius of gyration for each conformation in the ensemble.
-
+    mrasa = get_median_asa(data) #3. Median solvent accessibility for each position across ensemble conformations.
     md = get_median_distance(data)  # 5. Median distance of each pair of equivalent positions across ensemble conformations.
     stdev_d = get_stdev_distance(data)  # 6. Standard deviation of the distance of each pair of equivalent positions across ensemble conformations.
 
-
-    print(stdev_d)
-    return rg, md
+    return rg,mrasa, md, stdev_d
 
 def main():
     pdb_ids = []
