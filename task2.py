@@ -26,11 +26,32 @@ def get_median_distance(data):
             med_distance[i, j] = np.median(distances)
     return med_distance
 
+def get_stdev_distance(data):
+    global N
+    N = len(data[list(data.keys())[0]]['distance_matrix'])
+
+    stdev_distance = np.zeros((N, N))
+    for i in range(N):  # for
+        for j in range(N):  # for every conformation
+            distances = []
+            for key in data:
+                distances.append(data[key]["distance_matrix"][i][j])
+            stdev_distance[i, j] = np.std(distances)
+    return stdev_distance
 
 def get_ensemble_features(data):
-    md = get_median_distance(data)
+
     rg = get_radius_of_gyration(data)
-    print(md)
+    md = get_median_distance(data)
+    stdev_d = get_stdev_distance(data)
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+    im = ax.imshow(stdev_d)
+    fig.colorbar(im, fraction=0.03, pad=0.05)
+    plt.title("Standard deviation of the distance of each pair of equivalent positions across ensemble conformations")
+    plt.show()
+
+    print(stdev_d)
     return rg, md
 
 def main():
