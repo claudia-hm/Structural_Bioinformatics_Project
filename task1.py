@@ -78,6 +78,7 @@ def get_secondary_structure(structure):
                             break
     return ss
 
+
 def get_distance_matrix(structure, seq_sep=0):
 
     # Calculate the distance matrix

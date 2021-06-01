@@ -52,6 +52,49 @@ def get_stdev_distance(data):
             stdev_distance[i, j] = np.std(distances)
     return stdev_distance
 
+
+def get_ss_entropy(data):
+        # input matrix (MxN): M ensemble conformation, N residue
+    #list=[E,P,H,L,nn,entropy]
+    num_row, num_col =data.shape
+    
+    output=np.zeros((num_col,6))
+    
+
+    for int_mod in range(0,num_row):
+        for int_residue in range(0,num_col):
+
+            ss_residue=data[int_mod,int_residue]
+            #print(type(ss_residue))
+
+            if ss_residue=='E':
+                output[int_residue][0]+=1
+            elif ss_residue=='P':
+                output[int_residue][1]+=1
+            elif ss_residue=='H':
+                output[int_residue][2]+=1
+            elif ss_residue=='L':
+                output[int_residue][3]+=1
+            else:
+                output[int_residue][4]+=1
+
+
+
+    for int_residue in range(0, num_col):
+
+        output[int_residue]=output[int_residue]/num_row
+
+        log_frq=np.array([1,1,1,1,1],dtype=np.float)
+
+        for i in range(5):
+            if output[int_residue,i]!=0:
+                log_frq[i]=np.log(output[int_residue,i])
+        output[int_residue,5]=np.sum(-output[int_residue,0:5]*log_frq)
+
+
+
+    return output[:,5]
+
 def get_ensemble_features(data):
 
     rg = get_radius_of_gyration(data) # 1. Radius of gyration for each conformation in the ensemble.
