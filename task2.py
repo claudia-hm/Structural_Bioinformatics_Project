@@ -149,7 +149,8 @@ def get_stdev_distance(data):
     return stdev_distance
 
 
-
+def get_rASA_local_score(pdb_ids, ensembles_features):
+    pass
 
 def get_ensemble_features(data, pdb_id):
 
@@ -163,19 +164,9 @@ def get_ensemble_features(data, pdb_id):
     return rg, ss, mrasa, m_rsmd, md, stdev_d
 
 "2. A dendrogram/heatmap representing the distance (global score) between ensembles."
-def compute_global_score(med_mat_1, med_mat_2):
-    ens_dRSMD = np.sqrt((1/N)*np.sum(np.power(med_mat_1 - med_mat_2,2))) #FORMULA 4 LAZAR
-    return ens_dRSMD
-
-def heatmap(pdb_ids, med_mats):
-    heatmap = np.zeros((len(pdb_ids), len(pdb_ids)))
-    for ens1 in range(len(pdb_ids)):
-        for ens2 in range(len(pdb_ids)):
-            #print("computing score between: ", ens1, ens2 )
-            heatmap[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
-
+def heatmap(pdb_ids, global_score):
     fig, ax = plt.subplots()
-    im = ax.imshow(heatmap)
+    im = ax.imshow(global_score)
 
     # We want to show all ticks...
     ax.set_xticks(np.arange(len(pdb_ids)))
@@ -191,7 +182,7 @@ def heatmap(pdb_ids, med_mats):
     # Loop over data dimensions and create text annotations.
     for i in range(len(pdb_ids)):
         for j in range(len(pdb_ids)):
-            text = ax.text(j, i, "%.2f" %heatmap[i, j],
+            text = ax.text(j, i, "%.2f" %global_score[i, j],
                            ha="center", va="center", color="w")
 
     ax.set_title("Global score between ensembles")
@@ -199,10 +190,106 @@ def heatmap(pdb_ids, med_mats):
     ensemble_string = "_".join(pdb_ids)
     plt.savefig("features/task2_heatmap_{}.png".format(ensemble_string))
 
+def compute_global_score(med_mat_1, med_mat_2):
+    ens_dRSMD = np.sqrt((1/N)*np.sum(np.power(med_mat_1 - med_mat_2,2))) #FORMULA 4 LAZAR
+    return ens_dRSMD
+
+def get_global_score(pdb_ids, data, ensemble_features):
+    global_score = np.zeros((len(pdb_ids), len(pdb_ids)))
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(len(pdb_ids)):
+            #print("computing score between: ", ens1, ens2 )
+            global_score[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
+    return global_score
+
+def get_RMSD_local_score(pdb_ids, ensembles_features):
+    rmsd_local_score = {}
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(ens1+1,len(pdb_ids)):
+            rmsd1 = ensembles_features[ens1]['median_rsmd']
+            rmsd2 = ensembles_features[ens2]['median_rsmd']
+            rmsd_local_score[(pdb_ids[ens1], pdb_ids[ens2])] = np.abs(np.subtract(rmsd1,rmsd2))
+    return rmsd_local_score
+
+def get_rASA_local_score(pdb_ids, ensembles_features):
+    rmsd_local_score = {}
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(ens1+1,len(pdb_ids)):
+            rmsd1 = ensembles_features[ens1]['median_solvent_accessibility']
+            rmsd2 = ensembles_features[ens2]['median_solvent_accessibility']
+            rmsd_local_score[(pdb_ids[ens1], pdb_ids[ens2])] = np.abs(np.subtract(rmsd1,rmsd2))
+    return rmsd_local_score
+
+def get_ss_entropy_local_score(pdb_ids, ensembles_features):
+    rmsd_local_score = {}
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(ens1+1,len(pdb_ids)):
+            rmsd1 = ensembles_features[ens1]['ss_entropy']
+            rmsd2 = ensembles_features[ens2]['ss_entropy']
+            rmsd_local_score[(pdb_ids[ens1], pdb_ids[ens2])] = np.abs(np.subtract(rmsd1,rmsd2))
+    return rmsd_local_score
+
+def get_local_score(pdb_ids, ensembles_features):
+    global_score = np.zeros((len(pdb_ids), len(pdb_ids)))
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(len(pdb_ids)):
+            #print("computing score between: ", ens1, ens2 )
+            global_score[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
+    return global_score
+
+def plot_local_score(pdb_ids, ensembles_features, ens1, ens2):
+    local_score_dic = get_RMSD_local_score(pdb_ids, ensembles_features)
+    local_score_dic2 = get_rASA_local_score(pdb_ids, ensembles_features)
+    local_score_dic3 = get_ss_entropy_local_score(pdb_ids, ensembles_features)
+    local_score1 = local_score_dic[(pdb_ids[ens1], pdb_ids[ens2])]
+    local_score2 = local_score_dic2[(pdb_ids[ens1], pdb_ids[ens2])]
+    local_score3 = local_score_dic3[(pdb_ids[ens1], pdb_ids[ens2])]
+
+    median_rsmd1 = np.array(ensembles_features[ens1]['median_rsmd'])
+    median_rsmd2 = np.array(ensembles_features[ens2]['median_rsmd'])
+
+    rasa1 = np.array(ensembles_features[ens1]['median_solvent_accessibility'])
+    rasa2 = np.array(ensembles_features[ens2]['median_solvent_accessibility'])
+
+    entropy1 = np.array(ensembles_features[ens1]['ss_entropy'])
+    entropy2 = np.array(ensembles_features[ens2]['ss_entropy'])
+
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 2, sharex=True)
+    fig.suptitle("Local scores {}_{}".format(pdb_ids[ens1], pdb_ids[ens2]))
+    fig.set_figheight(10)
+    fig.set_figwidth(20)
+    ax1[0].plot(range(95), median_rsmd2, color='#990000',  linewidth=1)
+    ax1[0].plot(range(95),median_rsmd1, color='#000099',  linewidth=1)
+    ax1[0].fill_between(range(95),median_rsmd1, median_rsmd2, where=median_rsmd2 <= median_rsmd1, facecolor='#dddddd', interpolate=True)
+    ax1[0].fill_between(range(95),median_rsmd1, median_rsmd2, where=median_rsmd2 >= median_rsmd1, facecolor='#dddddd', interpolate=True)
+    ax1[0].set_ylabel('RSMD local score')
+
+
+    ax1[1].plot(range(95), local_score1, color='black',  linewidth=1)
+
+    ax2[0].plot(range(100), rasa2, color='#990000',  linewidth=1)
+    ax2[0].plot(range(100),rasa1, color='#000099',  linewidth=1)
+    ax2[0].fill_between(range(100),rasa1, rasa2, where=rasa2 <= rasa1, facecolor='#dddddd', interpolate=True)
+    ax2[0].fill_between(range(100),rasa1, rasa2, where=rasa2 >= rasa1, facecolor='#dddddd', interpolate=True)
+    ax2[0].set_ylabel('Median rasa local score')
+
+    ax2[1].plot(range(100), local_score2, color='black',  linewidth=1)
+
+    ax3[0].plot(range(100), entropy2, color='#990000',  linewidth=1)
+    ax3[0].plot(range(100),entropy1, color='#000099',  linewidth=1)
+    ax3[0].fill_between(range(100),entropy1, entropy2, where=entropy2 <= entropy1, facecolor='#dddddd', interpolate=True)
+    ax3[0].fill_between(range(100),entropy1, entropy2, where=entropy2 >= entropy1, facecolor='#dddddd', interpolate=True)
+    ax3[0].set_ylabel('SS entropy local score')
+
+    ax3[1].plot(range(100), local_score3, color='black',  linewidth=1)
+    plt.tight_layout()
+    plt.savefig("features/local_score_plot_{}-{}.png".format(pdb_ids[ens1],pdb_ids[ens2]))
+
 def main():
     pdb_ids = []
     global M
     median_distance_mats = []
+    ensembles_features = []
     for file in feature_files:
         pdb_id = os.path.basename(file)[:-34]
         pdb_ids.append(pdb_id) # get pdb_id from file name
@@ -219,14 +306,31 @@ def main():
         features['median_rsmd'] = m_rsmd.tolist()
         features['median_distance'] = md.tolist()
         features['stdev_distance'] = stdev_d.tolist()
-
+        ensembles_features.append(features)
         with open("features/{}_ensemble_features.json".format(pdb_id),'w') as outfile:
             json.dump(features, outfile)
+    for ens1 in range(len(pdb_ids)):
+        for ens2 in range(ens1+1,len(pdb_ids)):
+            plot_local_score(pdb_ids,ensembles_features,ens1,ens2)
 
 
 
+'''
+    local_score_dic2 = get_rASA_local_score(pdb_ids, ensembles_features)
+    local_score2 = local_score_dic2[(pd
+    b_ids[0], pdb_ids[1])]
+    local_score2 = (local_score2-np.mean(local_score2))/np.std(local_score2)
+    plt.plot(local_score2)
 
-    heatmap(pdb_ids, median_distance_mats)
+    local_score_dic3 = get_ss_entropy_local_score(pdb_ids, ensembles_features)
+    local_score3 = local_score_dic3[(pdb_ids[0], pdb_ids[1])]
+    local_score3 = (local_score3-np.mean(local_score3))/np.std(local_score3)
+    plt.plot(local_score3)
+
+    plt.savefig("features/test.png")
+    global_score_matrix = get_global_score(pdb_ids, median_distance_mats, ensembles_features)
+    heatmap(pdb_ids, global_score_matrix)
+'''
 
 
 
@@ -245,7 +349,7 @@ if __name__ == "__main__":
     import os
 
     N,M = 0,0
-    logging.basicConfig(filename="task2.log", encoding ='utf-8', level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+    logging.basicConfig(filename="task2.log", level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
 
     parser = argparse.ArgumentParser(description='Code for task 2 Structural Bioinformatics Project')
     parser.add_argument('feature_files', metavar='F', nargs='+',
