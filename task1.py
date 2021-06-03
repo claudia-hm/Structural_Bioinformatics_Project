@@ -105,6 +105,7 @@ def get_single_conformation_features(structure):
     dm = get_distance_matrix(structure)
 
     return rg, rasa, ss, dm
+
 '''2. Clustering functions '''
 def mseDistanceMatrix(matrix1, matrix2):
     array1 = np.asarray(matrix1)
@@ -234,7 +235,7 @@ def main():
 
 
 
-    with open("{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
+    with open("features/{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
         json.dump(features, outfile)
 
     import matplotlib.pyplot as plt
