@@ -1,5 +1,9 @@
 # Structural_Bioinformatics_Project
 
+### Report 
+https://docs.google.com/document/d/1sXajmJBS4c28_oSMq_bLZYVMLse5mOQzaHyH4lh0vFQ/edit?usp=sharing
+
+
 !pip install Bio
 !apt-get install dssp
 
