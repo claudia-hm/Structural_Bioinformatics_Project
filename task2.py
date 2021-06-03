@@ -56,7 +56,11 @@ def get_stdev_distance(data):
 def get_ss_entropy(data):
         # input matrix (MxN): M ensemble conformation, N residue
     #list=[E,P,H,L,nn,entropy]
-    num_row, num_col =data.shape
+    ss_mat = []
+    for key in data:
+        ss_mat.append(data[key]["secondary_structure"])
+
+    num_row, num_col =M,N
     
     output=np.zeros((num_col,6))
     
@@ -64,7 +68,8 @@ def get_ss_entropy(data):
     for int_mod in range(0,num_row):
         for int_residue in range(0,num_col):
 
-            ss_residue=data[int_mod,int_residue]
+            #ss_residue=data[int_mod,int_residue]
+            ss_residue = ss_mat[int_mod][int_residue]
             #print(type(ss_residue))
 
             if ss_residue=='E':
@@ -98,11 +103,12 @@ def get_ss_entropy(data):
 def get_ensemble_features(data):
 
     rg = get_radius_of_gyration(data) # 1. Radius of gyration for each conformation in the ensemble.
+    ss = get_ss_entropy(data)# 2. Secondary structure entropy for each position across ensemble conformations.
     mrasa = get_median_asa(data) #3. Median solvent accessibility for each position across ensemble conformations.
     md = get_median_distance(data)  # 5. Median distance of each pair of equivalent positions across ensemble conformations.
     stdev_d = get_stdev_distance(data)  # 6. Standard deviation of the distance of each pair of equivalent positions across ensemble conformations.
 
-    return rg,mrasa, md, stdev_d
+    return rg, ss, mrasa, md, stdev_d
 
 "2. A dendrogram/heatmap representing the distance (global score) between ensembles."
 def compute_global_score(med_mat_1, med_mat_2):
@@ -150,7 +156,7 @@ def main():
         with open(file) as f:
             data = json.load(f)
             M = len(data.keys())
-            rg,mrasa, md, stdev_d = get_ensemble_features(data)
+            rg, ss, mrasa, md, stdev_d = get_ensemble_features(data)
             median_distance_mats.append(md)
     heatmap(pdb_ids, median_distance_mats)
 
