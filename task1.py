@@ -196,7 +196,10 @@ def elbow_clustering(distanceMatrix,elbowErr):
       frag = ks[np.max([0, i - 1]): np.min([i + window_size_smooth, len(ks)])]
       errorSmooth.append(sum(frag) / len(frag))
     plt.plot(errorSmooth)
-    plt.show()
+    plt.xlabel("Number of clusters")
+    plt.ylabel("Smoothed error")
+    plt.title("Elbow plot")
+    plt.savefig("output/elbow_plot_{}.png".format(pdb_id))
     inertia = []
     inertia_smooth = []
     for i in range(maxCluster - 1):
@@ -260,6 +263,8 @@ def graph_printer(nodes,distanceMatrix):
     nx.draw_networkx_edge_labels(G,pos,edge_labels=dge_labels)
     nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.5)
 
+    nx.write_edgelist(G, "output/text_graph_{}".format(pdb_id))
+
     plt.savefig('output/{}_graph.png'.format(pdb_id))
 
 
@@ -312,21 +317,17 @@ def main():
         logging.info("Saving distance matrix for clustering.")
         np.save("output/clustering_dm_{}.npy".format(pdb_id), distanceMatrix)
 
-    plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
-    plt.show()
-    #
-    # cluster, k, representatives = elbow_clustering(distanceMatrix, 2)
-    # print(cluster)
-    # i = 0
-    #
-    # repDistanceMatrix = np.zeros((k, k))
-    # for i in range(k):
-    #     for j in range(k):
-    #         repDistanceMatrix[i][j] = distanceMatrix[representatives[i]][representatives[j]]
-    #
-    # print(representatives)
-    # graph_printer(representatives, repDistanceMatrix)
-    # graph_heatmap(representatives, repDistanceMatrix)
+    logging.info("Elbow clustering")
+    cluster, k, representatives = elbow_clustering(distanceMatrix, 2)
+
+    repDistanceMatrix = np.zeros((k, k))
+    for i in range(k):
+        for j in range(k):
+            repDistanceMatrix[i][j] = distanceMatrix[representatives[i]][representatives[j]]
+
+    #print(representatives)
+    graph_printer(representatives, repDistanceMatrix)
+    graph_heatmap(representatives, repDistanceMatrix)
     logging.info("Task 1 program end")
 
 if __name__ == "__main__":
@@ -340,6 +341,7 @@ if __name__ == "__main__":
     from Bio.Cluster import kmedoids
     import math
     import argparse
+    import networkx as nx
     import os
     import sys
     import matplotlib.pyplot as plt

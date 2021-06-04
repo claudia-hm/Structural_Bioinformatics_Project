@@ -1,1 +1,19 @@
-2021-06-03 09:31:57,518 INFO: Program start
+2021-06-04 22:52:58,547 INFO: Program start
+2021-06-04 22:52:58,551 INFO: Parsing file: features/PED00153e007_single_conformation_features.json
+2021-06-04 22:52:59,871 INFO: Computing ensemble features.PDB id: PED00153e007
+2021-06-04 22:53:10,797 INFO: Dumping ensemble features features to file. PDB id: PED00153e007
+2021-06-04 22:53:10,872 INFO: Parsing file: features/PED00153e008_single_conformation_features.json
+2021-06-04 22:53:12,183 INFO: Computing ensemble features.PDB id: PED00153e008
+2021-06-04 22:53:23,868 INFO: Dumping ensemble features features to file. PDB id: PED00153e008
+2021-06-04 22:53:23,918 INFO: Computing global scores
+2021-06-04 22:53:23,919 INFO: Computing global score between ensemble
+2021-06-04 22:53:23,921 INFO: Computing global score between ensemble
+2021-06-04 22:53:23,922 INFO: Computing global score between ensemble
+2021-06-04 22:53:23,924 INFO: Computing global score between ensemble
+2021-06-04 22:53:23,925 INFO: Creating global score heatmap
+2021-06-04 22:53:24,508 INFO: Plotting local score
+2021-06-04 22:53:24,508 INFO: Computing RSMD local score
+2021-06-04 22:53:24,508 INFO: Computing rASA local score
+2021-06-04 22:53:24,508 INFO: Computing SS entropy local score
+2021-06-04 22:53:24,508 INFO: Creating local score plot
+2021-06-04 22:53:25,516 INFO: Task 2 program end
