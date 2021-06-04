@@ -8,8 +8,6 @@ def get_ensemble_dimension(ensemble):
         for residue in chain:
             if is_aa(residue):  # Filter hetero groups (returns only amino acids)                                      IUPACData.protein_letters_3to1.get(residue.get_resname().capitalize())))
                 N += 1
-            else:
-                print(residue.id)
     return N,M
 
 
@@ -33,7 +31,6 @@ def get_radius_of_gyration(structure):
     dist = coord - barycenter
     dist = dist * dist
     dist = np.sqrt(np.sum(dist, axis=1))
-    #print(dist)
 
     return round(math.sqrt(np.sum(dist * dist) / len(coord)), 3)
 
@@ -48,7 +45,7 @@ def get_relative_asas(structure):
             rASA[i]=hse[(chain.id, residue.id)][0]
             i=i+1
         except:
-            print("")
+            continue
   max=np.max(rASA)
   min=np.min(rASA)
   rASA= 1 - (rASA-min)/(max-min)
@@ -106,7 +103,6 @@ def get_single_conformation_features(structure):
 
     return rg, rasa, ss, dm
 
-'''2. Clustering functions '''
 def mseDistanceMatrix(matrix1, matrix2):
     array1 = np.asarray(matrix1)
     array2 = np.asarray(matrix2)
@@ -116,133 +112,222 @@ def mseDistanceMatrix(matrix1, matrix2):
     return mse
 
 
-def mserASA(asa1, asa2):
-    array1 = np.asarray(asa1)
-    array2 = np.asarray(asa2)
-    '''
-    difference_array = np.subtract(array1, array2)
-    squared_array = np.square(difference_array)
-    mse = squared_array.mean()
-    '''
+def meanDifferenceRASA(asa1, asa2):
+    array1=np.asarray(asa1)
+    array2=np.asarray(asa2)
     return np.abs(array1.mean() - array2.mean())
 
-
 def ssNumberOfDismatch(ss1, ss2):
-    max = 1
-    countE = 0
-    countP = 0
-    countH = 0
-    countL = 0
-    countNone = 0
-    np.count_nonzero(ss1 == ss2)
-    for i in range(N):
-        if ss1[i] == ss2[i]:
-            if ss1[i] == "E":
-                countE += 1
-            elif ss1[i] == "P":
-                countP += 1
-            elif ss1[i] == "H":
-                countH += 1
-            elif ss1[i] == "L":
-                countL += 1
-            else:
-                None
-    return (N - (countE + countP + countH + countL)) / N
-
+    str1=''.join(ss1)
+    str2=''.join(ss2)
+    return 1 - SequenceMatcher(None, a=str1, b= str2).ratio()
 
 def getResidueRGdistanceMatrix():
-    dgMat = np.zeros((M, M))
+    dgMat = np.zeros((M,M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id, i)
-        for j in range(i, M):
-            jd = "{}_{}".format(pdb_id, j)
-            dgMat[i][j] = np.abs(np.subtract(features[id]['radius_of_giration'], features[jd]['radius_of_giration']))
+        id = "{}_{}".format(pdb_id,i)
+        for j in range(i,M):
+            jd = "{}_{}".format(pdb_id,j)
+            dgMat[i][j]=np.abs(np.subtract(features[id]['radius_of_giration'] , features[jd]['radius_of_giration']))
     max = np.max(dgMat)
     min = np.min(dgMat)
-    return np.divide(dgMat - min, max - min)
-
+    return np.divide(dgMat-min,max-min)
 
 def getResidueASAdistanceMatrix():
-    asaMat = np.zeros((M, M))
+    asaMat = np.zeros((M,M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id, i)
-        for j in range(i, M):
-            jd = "{}_{}".format(pdb_id, j)
-            asaMat[i][j] = mserASA(features[id]['relative_asas'], features[jd]['relative_asas'])
+        id = "{}_{}".format(pdb_id,i)
+        for j in range(i,M):
+            jd = "{}_{}".format(pdb_id,j)
+            asaMat[i][j]=meanDifferenceRASA(features[id]['relative_asas'],features[jd]['relative_asas'])
     max = np.max(asaMat)
     min = np.min(asaMat)
-    return np.divide(asaMat - min, max - min)
-
+    return np.divide(asaMat-min,max-min)
 
 def getResidueSSdistanceMatrix():
-    ssMat = np.zeros((M, M))
+    ssMat = np.zeros((M,M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id, i)
-        for j in range(i, M):
-            jd = "{}_{}".format(pdb_id, j)
-            ssMat[i][j] = ssNumberOfDismatch(features[id]['secondary_structure'], features[jd]['secondary_structure'])
+        id = "{}_{}".format(pdb_id,i)
+        for j in range(i,M):
+            jd = "{}_{}".format(pdb_id,j)
+            ssMat[i][j]=ssNumberOfDismatch(features[id]['secondary_structure'],features[jd]['secondary_structure'])
     max = np.max(ssMat)
     min = np.min(ssMat)
-    return np.divide(ssMat - min, max - min)
-
+    return np.divide(ssMat-min,max-min)
 
 def getResidueDMdistanceMatrix():
-    distMat = np.zeros((M, M))
+    distMat = np.zeros((M,M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id, i)
-        for j in range(i, M):
-            jd = "{}_{}".format(pdb_id, j)
-            distMat[i][j] = mseDistanceMatrix(features[id]['distance_matrix'], features[jd]['distance_matrix'])
+        id = "{}_{}".format(pdb_id,i)
+        for j in range(i,M):
+            jd = "{}_{}".format(pdb_id,j)
+            distMat[i][j]=mseDistanceMatrix(features[id]['distance_matrix'],features[jd]['distance_matrix'])
     max = np.max(distMat)
     min = np.min(distMat)
-    return np.divide(distMat, max)
+    return np.divide(distMat,max)
 
 def get_distance_matrix_clustering():
-    print("calcolo RG mat")
     dg = getResidueRGdistanceMatrix()
 
-    print("calcolo ASA mat")
     da = getResidueASAdistanceMatrix()
 
-    print("calcolo SS mat")
     ds = getResidueSSdistanceMatrix()
 
-    print("calcolo DM mat")
     dm = getResidueDMdistanceMatrix()
 
-    distanceMatrix = dg + da + ds + dm
-    return distanceMatrix
+    return dg, da, ds, dm
+
+def l2_distance(dg, da, ds, dm):
+    return np.square(dg ** 2 + da ** 2 + ds ** 2 + dm ** 2)
+
+def l1_distance(dg, da, ds, dm):
+    return dg + da + ds + dm
+
+def elbow_clustering(distanceMatrix,elbowErr):
+    maxCluster = N-2
+    clusters = [[] for x in range(maxCluster)]
+    ks = np.zeros(maxCluster)
+    err = np.zeros(maxCluster)
+    for k in range(2, maxCluster + 2):
+        clusters[k - 2], ks[k - 2], err[k - 2] = kmedoids(distance=distanceMatrix, nclusters=int(k), npass=100)
+    window_size_smooth=5
+    errorSmooth = []
+    for i in range(len(ks)):
+      frag = ks[np.max([0, i - 1]): np.min([i + window_size_smooth, len(ks)])]
+      errorSmooth.append(sum(frag) / len(frag))
+    plt.plot(errorSmooth)
+    plt.show()
+    inertia = []
+    inertia_smooth = []
+    for i in range(maxCluster - 1):
+      inertia.append(np.abs(errorSmooth[i] - errorSmooth[i + 1]))
+
+    window_size_smooth=10
+    for i in range(len(inertia)):
+      frag = inertia[np.max([0, i - 1]): np.min([i + window_size_smooth, len(inertia)])]
+      inertia_smooth.append(sum(frag) / len(frag))
+
+    for i in range(maxCluster - 1):
+        if inertia_smooth[i] <= np.mean(inertia_smooth)*elbowErr:
+            k = i+2
+            break
+    cluster=clusters[k-2]
+    representatives=[]
+    for rep in cluster:
+        if rep not in representatives:
+            representatives.append(rep)
+    return cluster, k, representatives
+
+
+def graph_heatmap(representatives, heatmap):
+    fig, ax = plt.subplots()
+    fig.set_figheight(10)
+    fig.set_figwidth(10)
+    im = ax.imshow(heatmap)
+
+    # We want to show all ticks...
+    ax.set_xticks(np.arange(len(representatives)))
+    ax.set_yticks(np.arange(len(representatives)))
+    # ... and label them with the respective list entries
+    ax.set_xticklabels(representatives)
+    ax.set_yticklabels(representatives)
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+             rotation_mode="anchor")
+
+    # Loop over data dimensions and create text annotations.
+    for i in range(len(representatives)):
+        for j in range(len(representatives)):
+            text = ax.text(j, i, "%.3f" %(heatmap[i, j]*100),
+                           ha="center", va="center", color="w")
+
+    ax.set_title("Graph weight heatmap")
+    fig.tight_layout()
+    plt.savefig("output/{}_graph_heatmap.png".format(pdb_id))
+
+def graph_printer(nodes,distanceMatrix):
+    graph=np.zeros((len(nodes),len(nodes)))
+    G = nx.from_numpy_matrix(distanceMatrix)
+    labels = nx.get_edge_attributes(G,'weight')
+    dge_labels = dict([((u,v,), f"{d['weight']:.2f}") for u,v,d in G.edges(data=True)])
+    labels_dict = dict([(u[0], nodes[u[0]]) for u in G.nodes(data=True)])
+
+    plt.figure(figsize=(15,15))
+    pos=nx.spring_layout(G)
+    nx.draw_networkx_labels(G,pos,labels_dict,font_size=17)
+    nx.draw_networkx_nodes(G,pos,nodelist=[j for j in range(0,len(graph))],node_color='lightblue',node_size=1000,ax=None,alpha=0.8)
+    nx.draw_networkx_edge_labels(G,pos,edge_labels=dge_labels)
+    nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.5)
+
+    plt.savefig('output/{}_graph.png'.format(pdb_id))
+
+
 
 def main():
     global pdb_id
     pdb_id = os.path.basename(pdb_path)[:-4]
     ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
-    print(pdb_id)
     global N
     global M
     N,M = get_ensemble_dimension(ensemble)
     rg = np.zeros(M)
     global features
 
-    logging.info("Radius of gyration")
+    logging.info("Computing single conformation features")
     for i in range(M):
         id = "{}_{}".format(pdb_id,i)
         features[id] = {}
+        logging.info("Structure {} out of {}".format(i,M))
         features[id]['radius_of_giration'] = get_radius_of_gyration(ensemble[i])
         features[id]['relative_asas'] = get_relative_asas(ensemble[i]).tolist()
         features[id]['secondary_structure'] = list(get_secondary_structure(ensemble[i]))
         features[id]['distance_matrix'] =get_distance_matrix(ensemble[i]).tolist()
 
-
-
+    logging.info("Dumping single conformation features to file")
     with open("features/{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
         json.dump(features, outfile)
 
-    import matplotlib.pyplot as plt
+    # logging.info("Showing clustering distance matrix")
+    # plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
+    # plt.show()
+    if os.path.isfile("output/clustering_dm_{}.npy".format(pdb_id)):
+        logging.info("Loading distance matrix for clustering.")
+        distanceMatrix = np.load("output/clustering_dm_{}.npy".format(pdb_id))
+    else:
+        logging.info("Computing distance matrix for clustering.")
+        dg, da, ds, dm = get_distance_matrix_clustering()
+        distanceMatrix = l2_distance(dg, da, ds, dm)
 
-    clustering_dm = get_distance_matrix_clustering()
-    plt.imshow(clustering_dm, cmap='hot', interpolation='nearest')
+        max = np.max(distanceMatrix)
+        distanceMatrix = distanceMatrix / max
+        for i in range(M):
+            logging.info("Structure {} out of {}".format(i, M))
+            distanceMatrix[i][i] = 0
+            for j in range(i, M):
+                distanceMatrix[j][i] = distanceMatrix[i][j]
+        #
+        if not os.path.exists("output"):
+            os.makedirs("output")
+        logging.info("Saving distance matrix for clustering.")
+        np.save("output/clustering_dm_{}.npy".format(pdb_id), distanceMatrix)
+
+    plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
     plt.show()
+    #
+    # cluster, k, representatives = elbow_clustering(distanceMatrix, 2)
+    # print(cluster)
+    # i = 0
+    #
+    # repDistanceMatrix = np.zeros((k, k))
+    # for i in range(k):
+    #     for j in range(k):
+    #         repDistanceMatrix[i][j] = distanceMatrix[representatives[i]][representatives[j]]
+    #
+    # print(representatives)
+    # graph_printer(representatives, repDistanceMatrix)
+    # graph_heatmap(representatives, repDistanceMatrix)
+    logging.info("Task 1 program end")
 
 if __name__ == "__main__":
     import argparse
@@ -251,21 +336,35 @@ if __name__ == "__main__":
     import numpy as np
     from Bio.PDB import is_aa, PPBuilder, HSExposureCB
     from Bio.PDB.PDBParser import PDBParser
+    from difflib import SequenceMatcher
+    from Bio.Cluster import kmedoids
     import math
     import argparse
     import os
+    import sys
+    import matplotlib.pyplot as plt
+    import warnings
+    warnings.filterwarnings("ignore")
 
     N,M = 0,0
     features = {}
     pdb_id = ""
-    logging.basicConfig(filename="task1.log", encoding='utf-8', level=logging.INFO,
-                        format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+
 
     parser = argparse.ArgumentParser(description='Code for task 1 Structural Bioinformatics Project')
     parser.add_argument('file', metavar='F', nargs=1,
                         help='PDB file path')
+    parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
 
     args = parser.parse_args()
     pdb_path = args.file[0]
+    logging_stdout = args.log_stdout
+    if logging_stdout:
+        logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
+                            format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+    else:
+        logging.basicConfig(filename="task1.log", encoding='utf-8', level=logging.INFO,
+                            format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+
     logging.info("Program start")
     main()

@@ -165,6 +165,7 @@ def get_ensemble_features(data, pdb_id):
 
 "2. A dendrogram/heatmap representing the distance (global score) between ensembles."
 def heatmap(pdb_ids, global_score):
+    logging.info("Creating global score heatmap")
     fig, ax = plt.subplots()
     im = ax.imshow(global_score)
 
@@ -188,18 +189,19 @@ def heatmap(pdb_ids, global_score):
     ax.set_title("Global score between ensembles")
     fig.tight_layout()
     ensemble_string = "_".join(pdb_ids)
-    plt.savefig("features/task2_heatmap_{}.png".format(ensemble_string))
+    plt.savefig("output/task2_heatmap_{}.png".format(ensemble_string))
+
 
 def compute_global_score(med_mat_1, med_mat_2):
-    ens_dRSMD = np.sqrt((1/N)*np.sum(np.power(med_mat_1 - med_mat_2,2))) #FORMULA 4 LAZAR
+    ens_dRSMD = np.sqrt((1/N)*np.sum(np.power(np.array(med_mat_1) - np.array(med_mat_2),2))) #FORMULA 4 LAZAR
     return ens_dRSMD
 
-def get_global_score(pdb_ids, data, ensemble_features):
+def get_global_score(pdb_ids, ensemble_features):
     global_score = np.zeros((len(pdb_ids), len(pdb_ids)))
     for ens1 in range(len(pdb_ids)):
         for ens2 in range(len(pdb_ids)):
-            #print("computing score between: ", ens1, ens2 )
-            global_score[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
+            logging.info("Computing global score between ensemble")
+            global_score[ens1][ens2] = compute_global_score(ensemble_features[ens1]["median_distance"], ensemble_features[ens2]["median_distance"])
     return global_score
 
 def get_RMSD_local_score(pdb_ids, ensembles_features):
@@ -238,13 +240,17 @@ def get_local_score(pdb_ids, ensembles_features):
     return global_score
 
 def plot_local_score(pdb_ids, ensembles_features, ens1, ens2):
+    logging.info("Computing RSMD local score")
     local_score_dic = get_RMSD_local_score(pdb_ids, ensembles_features)
+    logging.info("Computing rASA local score")
     local_score_dic2 = get_rASA_local_score(pdb_ids, ensembles_features)
+    logging.info("Computing SS entropy local score")
     local_score_dic3 = get_ss_entropy_local_score(pdb_ids, ensembles_features)
     local_score1 = local_score_dic[(pdb_ids[ens1], pdb_ids[ens2])]
     local_score2 = local_score_dic2[(pdb_ids[ens1], pdb_ids[ens2])]
     local_score3 = local_score_dic3[(pdb_ids[ens1], pdb_ids[ens2])]
 
+    logging.info("Creating local score plot")
     median_rsmd1 = np.array(ensembles_features[ens1]['median_rsmd'])
     median_rsmd2 = np.array(ensembles_features[ens2]['median_rsmd'])
 
@@ -283,7 +289,7 @@ def plot_local_score(pdb_ids, ensembles_features, ens1, ens2):
 
     ax3[1].plot(range(100), local_score3, color='black',  linewidth=1)
     plt.tight_layout()
-    plt.savefig("features/local_score_plot_{}-{}.png".format(pdb_ids[ens1],pdb_ids[ens2]))
+    plt.savefig("output/local_score_plot_{}-{}.png".format(pdb_ids[ens1],pdb_ids[ens2]))
 
 def main():
     pdb_ids = []
@@ -291,15 +297,16 @@ def main():
     median_distance_mats = []
     ensembles_features = []
     for file in feature_files:
+        logging.info("Parsing file: {}".format(file))
         pdb_id = os.path.basename(file)[:-34]
         pdb_ids.append(pdb_id) # get pdb_id from file name
         with open(file) as f:
             data = json.load(f)
             M = len(data.keys())
+            logging.info("Computing ensemble features.PDB id: {}".format(pdb_id))
             rg, ss, mrasa, m_rsmd, md, stdev_d = get_ensemble_features(data, pdb_id)
             median_distance_mats.append(md)
         features = {}
-
         features['radius_of_giration'] = rg.tolist()
         features['ss_entropy'] = ss.tolist()
         features['median_solvent_accessibility'] = mrasa.tolist()
@@ -307,31 +314,37 @@ def main():
         features['median_distance'] = md.tolist()
         features['stdev_distance'] = stdev_d.tolist()
         ensembles_features.append(features)
+        logging.info("Dumping ensemble features features to file. PDB id: {}".format(pdb_id))
         with open("features/{}_ensemble_features.json".format(pdb_id),'w') as outfile:
             json.dump(features, outfile)
+
+    logging.info("Computing global scores")
+    global_score_matrix = get_global_score(pdb_ids, ensembles_features)
+    heatmap(pdb_ids, global_score_matrix)
+
+    logging.info("Plotting local score".format(pdb_id))
     for ens1 in range(len(pdb_ids)):
         for ens2 in range(ens1+1,len(pdb_ids)):
             plot_local_score(pdb_ids,ensembles_features,ens1,ens2)
 
 
 
-'''
-    local_score_dic2 = get_rASA_local_score(pdb_ids, ensembles_features)
-    local_score2 = local_score_dic2[(pd
-    b_ids[0], pdb_ids[1])]
-    local_score2 = (local_score2-np.mean(local_score2))/np.std(local_score2)
-    plt.plot(local_score2)
 
-    local_score_dic3 = get_ss_entropy_local_score(pdb_ids, ensembles_features)
-    local_score3 = local_score_dic3[(pdb_ids[0], pdb_ids[1])]
-    local_score3 = (local_score3-np.mean(local_score3))/np.std(local_score3)
-    plt.plot(local_score3)
+    # local_score_dic2 = get_rASA_local_score(pdb_ids, ensembles_features)
+    # local_score2 = local_score_dic2[(pd
+    # b_ids[0], pdb_ids[1])]
+    # local_score2 = (local_score2-np.mean(local_score2))/np.std(local_score2)
+    # plt.plot(local_score2)
+    #
+    # local_score_dic3 = get_ss_entropy_local_score(pdb_ids, ensembles_features)
+    # local_score3 = local_score_dic3[(pdb_ids[0], pdb_ids[1])]
+    # local_score3 = (local_score3-np.mean(local_score3))/np.std(local_score3)
+    # plt.plot(local_score3)
+    #
+    # plt.savefig("features/test.png")
 
-    plt.savefig("features/test.png")
-    global_score_matrix = get_global_score(pdb_ids, median_distance_mats, ensembles_features)
-    heatmap(pdb_ids, global_score_matrix)
-'''
 
+    logging.info("Task 2 program end")
 
 
 if __name__ == "__main__":
@@ -345,19 +358,29 @@ if __name__ == "__main__":
     import requests
     import math
     import matplotlib.pyplot as plt
-    import argparse
-    import os
+    import argparse, os, sys
+
 
     N,M = 0,0
-    logging.basicConfig(filename="task2.log", level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
 
     parser = argparse.ArgumentParser(description='Code for task 2 Structural Bioinformatics Project')
     parser.add_argument('feature_files', metavar='F', nargs='+',
                         help='Feature files')
+    parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
+
     args = parser.parse_args()
+
+    logging_stdout = args.log_stdout
+    if logging_stdout:
+        logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
+                            format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+    else:
+        logging.basicConfig(filename="task2.log", encoding='utf-8', level=logging.INFO,
+                            format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+
     if len(args.feature_files) > 1:
         feature_files = args.feature_files
-        print(feature_files)
+
         logging.info("Program start")
         main()
     else:
