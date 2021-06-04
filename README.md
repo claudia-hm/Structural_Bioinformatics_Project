@@ -1,5 +1,9 @@
 # Structural_Bioinformatics_Project
 
+### Report 
+https://docs.google.com/document/d/1sXajmJBS4c28_oSMq_bLZYVMLse5mOQzaHyH4lh0vFQ/edit?usp=sharing
+
+
 !pip install Bio
 !apt-get install dssp
 
@@ -18,7 +22,7 @@ This checklist refers to the python files task1.py, task2.p. Only mark as check 
 #### Task2
 - [x] a. Ensembles features
   - [x] 1. Radius of gyration for each conformation in the ensemble.
-  - [ ] 2. Secondary structure entropy for each position across ensemble conformations.
+  - [x] 2. Secondary structure entropy for each position across ensemble conformations.
   - [x] 3. Median solvent accessibility for each position across ensemble conformations.
   - [ ] 4. Median RMSD for each position across ensemble conformations
   - [x] 5. Median distance of each pair of equivalent positions across ensemble conformations.
