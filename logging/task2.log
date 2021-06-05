@@ -1,31 +1,115 @@
-2021-06-05 19:19:18,401 INFO: Program start
-2021-06-05 19:19:18,402 INFO: Parsing file: features/PED00153e007_single_conformation_features.json
-2021-06-05 19:19:19,920 INFO: Computing ensemble features.PDB id: PED00153e007
-2021-06-05 19:19:19,920 INFO: Computing radius of gyration
-2021-06-05 19:19:19,921 INFO: Computing Secondary Structure entropy
-2021-06-05 19:19:19,948 INFO: Computing median solvent accessibility 
-2021-06-05 19:19:19,966 INFO: Computing median RSMD 
-2021-06-05 19:19:32,837 INFO: Computing median distance
-2021-06-05 19:19:34,874 INFO: Computing standard deviation distance
-2021-06-05 19:19:36,353 INFO: Dumping ensemble features features to file. PDB id: PED00153e007
-2021-06-05 19:19:36,419 INFO: Parsing file: features/PED00153e008_single_conformation_features.json
-2021-06-05 19:19:37,793 INFO: Computing ensemble features.PDB id: PED00153e008
-2021-06-05 19:19:37,796 INFO: Computing radius of gyration
-2021-06-05 19:19:37,800 INFO: Computing Secondary Structure entropy
-2021-06-05 19:19:37,831 INFO: Computing median solvent accessibility 
-2021-06-05 19:19:37,848 INFO: Computing median RSMD 
-2021-06-05 19:19:48,580 INFO: Computing median distance
-2021-06-05 19:19:50,112 INFO: Computing standard deviation distance
-2021-06-05 19:19:51,284 INFO: Dumping ensemble features features to file. PDB id: PED00153e008
-2021-06-05 19:19:51,351 INFO: Computing global scores
-2021-06-05 19:19:51,351 INFO: Computing global score between ensemble
-2021-06-05 19:19:51,353 INFO: Computing global score between ensemble
-2021-06-05 19:19:51,354 INFO: Computing global score between ensemble
-2021-06-05 19:19:51,356 INFO: Computing global score between ensemble
-2021-06-05 19:19:51,357 INFO: Creating global score heatmap
-2021-06-05 19:19:52,727 INFO: Plotting local score
-2021-06-05 19:19:52,728 INFO: Computing RSMD local score
-2021-06-05 19:19:52,729 INFO: Computing rASA local score
-2021-06-05 19:19:52,729 INFO: Computing SS entropy local score
-2021-06-05 19:19:52,729 INFO: Creating local score plot
-2021-06-05 19:19:53,869 INFO: Task 2 program end
+2021-06-05 20:20:16,521 INFO: Program start
+2021-06-05 20:20:16,525 INFO: Parsing file: features/PED00153e007_single_conformation_features.json
+2021-06-05 20:20:18,013 INFO: Computing ensemble features.PDB id: PED00153e007
+2021-06-05 20:20:18,014 INFO: Computing radius of gyration
+2021-06-05 20:20:18,016 INFO: Computing Secondary Structure entropy
+2021-06-05 20:20:18,045 INFO: Computing median solvent accessibility 
+2021-06-05 20:20:18,058 INFO: Computing median RSMD 
+2021-06-05 20:20:26,849 INFO: Computing median distance
+2021-06-05 20:20:28,226 INFO: Computing standard deviation distance
+2021-06-05 20:20:29,581 INFO: Dumping ensemble features features to file. PDB id: PED00153e007
+2021-06-05 20:20:29,640 INFO: Parsing file: features/PED00153e008_single_conformation_features.json
+2021-06-05 20:20:31,138 INFO: Computing ensemble features.PDB id: PED00153e008
+2021-06-05 20:20:31,138 INFO: Computing radius of gyration
+2021-06-05 20:20:31,139 INFO: Computing Secondary Structure entropy
+2021-06-05 20:20:31,167 INFO: Computing median solvent accessibility 
+2021-06-05 20:20:31,185 INFO: Computing median RSMD 
+2021-06-05 20:20:43,765 INFO: Computing median distance
+2021-06-05 20:20:45,314 INFO: Computing standard deviation distance
+2021-06-05 20:20:46,537 INFO: Dumping ensemble features features to file. PDB id: PED00153e008
+2021-06-05 20:20:46,597 INFO: Parsing file: features/PED00153e009_single_conformation_features.json
+2021-06-05 20:20:47,999 INFO: Computing ensemble features.PDB id: PED00153e009
+2021-06-05 20:20:47,999 INFO: Computing radius of gyration
+2021-06-05 20:20:48,000 INFO: Computing Secondary Structure entropy
+2021-06-05 20:20:48,033 INFO: Computing median solvent accessibility 
+2021-06-05 20:20:48,047 INFO: Computing median RSMD 
+2021-06-05 20:20:57,031 INFO: Computing median distance
+2021-06-05 20:20:58,669 INFO: Computing standard deviation distance
+2021-06-05 20:20:59,827 INFO: Dumping ensemble features features to file. PDB id: PED00153e009
+2021-06-05 20:20:59,872 INFO: Parsing file: features/PED00153e010_single_conformation_features.json
+2021-06-05 20:21:01,280 INFO: Computing ensemble features.PDB id: PED00153e010
+2021-06-05 20:21:01,280 INFO: Computing radius of gyration
+2021-06-05 20:21:01,281 INFO: Computing Secondary Structure entropy
+2021-06-05 20:21:01,308 INFO: Computing median solvent accessibility 
+2021-06-05 20:21:01,323 INFO: Computing median RSMD 
+2021-06-05 20:21:16,532 INFO: Computing median distance
+2021-06-05 20:21:18,006 INFO: Computing standard deviation distance
+2021-06-05 20:21:19,268 INFO: Dumping ensemble features features to file. PDB id: PED00153e010
+2021-06-05 20:21:19,323 INFO: Parsing file: features/PED00153e011_single_conformation_features.json
+2021-06-05 20:21:20,789 INFO: Computing ensemble features.PDB id: PED00153e011
+2021-06-05 20:21:20,790 INFO: Computing radius of gyration
+2021-06-05 20:21:20,791 INFO: Computing Secondary Structure entropy
+2021-06-05 20:21:20,815 INFO: Computing median solvent accessibility 
+2021-06-05 20:21:20,828 INFO: Computing median RSMD 
+2021-06-05 20:21:36,942 INFO: Computing median distance
+2021-06-05 20:21:38,786 INFO: Computing standard deviation distance
+2021-06-05 20:21:39,933 INFO: Dumping ensemble features features to file. PDB id: PED00153e011
+2021-06-05 20:21:39,983 INFO: Computing global scores
+2021-06-05 20:21:39,983 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,985 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,987 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,989 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,990 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,992 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,993 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,995 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,996 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,998 INFO: Computing global score between ensemble
+2021-06-05 20:21:39,999 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,006 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,008 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,009 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,011 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,012 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,014 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,016 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,017 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,018 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,020 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,021 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,023 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,024 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,026 INFO: Computing global score between ensemble
+2021-06-05 20:21:40,028 INFO: Creating global score heatmap
+2021-06-05 20:21:41,850 INFO: Plotting local score
+2021-06-05 20:21:41,850 INFO: Computing RSMD local score
+2021-06-05 20:21:41,850 INFO: Computing rASA local score
+2021-06-05 20:21:41,851 INFO: Computing SS entropy local score
+2021-06-05 20:21:41,851 INFO: Creating local score plot
+2021-06-05 20:21:42,887 INFO: Computing RSMD local score
+2021-06-05 20:21:42,887 INFO: Computing rASA local score
+2021-06-05 20:21:42,887 INFO: Computing SS entropy local score
+2021-06-05 20:21:42,888 INFO: Creating local score plot
+2021-06-05 20:21:43,838 INFO: Computing RSMD local score
+2021-06-05 20:21:43,838 INFO: Computing rASA local score
+2021-06-05 20:21:43,839 INFO: Computing SS entropy local score
+2021-06-05 20:21:43,839 INFO: Creating local score plot
+2021-06-05 20:21:46,203 INFO: Computing RSMD local score
+2021-06-05 20:21:46,204 INFO: Computing rASA local score
+2021-06-05 20:21:46,204 INFO: Computing SS entropy local score
+2021-06-05 20:21:46,204 INFO: Creating local score plot
+2021-06-05 20:21:49,331 INFO: Computing RSMD local score
+2021-06-05 20:21:49,332 INFO: Computing rASA local score
+2021-06-05 20:21:49,332 INFO: Computing SS entropy local score
+2021-06-05 20:21:49,333 INFO: Creating local score plot
+2021-06-05 20:21:51,073 INFO: Computing RSMD local score
+2021-06-05 20:21:51,074 INFO: Computing rASA local score
+2021-06-05 20:21:51,074 INFO: Computing SS entropy local score
+2021-06-05 20:21:51,074 INFO: Creating local score plot
+2021-06-05 20:21:52,847 INFO: Computing RSMD local score
+2021-06-05 20:21:52,847 INFO: Computing rASA local score
+2021-06-05 20:21:52,848 INFO: Computing SS entropy local score
+2021-06-05 20:21:52,848 INFO: Creating local score plot
+2021-06-05 20:21:56,489 INFO: Computing RSMD local score
+2021-06-05 20:21:56,494 INFO: Computing rASA local score
+2021-06-05 20:21:56,494 INFO: Computing SS entropy local score
+2021-06-05 20:21:56,495 INFO: Creating local score plot
+2021-06-05 20:21:57,858 INFO: Computing RSMD local score
+2021-06-05 20:21:57,858 INFO: Computing rASA local score
+2021-06-05 20:21:57,858 INFO: Computing SS entropy local score
+2021-06-05 20:21:57,859 INFO: Creating local score plot
+2021-06-05 20:21:58,874 INFO: Computing RSMD local score
+2021-06-05 20:21:58,875 INFO: Computing rASA local score
+2021-06-05 20:21:58,875 INFO: Computing SS entropy local score
+2021-06-05 20:21:58,875 INFO: Creating local score plot
+2021-06-05 20:21:59,982 INFO: Task 2 program end
