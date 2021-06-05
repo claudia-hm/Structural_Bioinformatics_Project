@@ -474,12 +474,11 @@ if __name__ == "__main__":
         logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
     else:
-        logging.basicConfig(filename="task1.log", encoding='utf-8', level=logging.INFO,
+        if not os.path.exists("logging"): os.makedirs("logging")
+        logging.basicConfig(filename="logging/task1.log", encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
-    if not os.path.exists("output"):
-        os.makedirs("output")
-    if not os.path.exists("features"):
-        os.makedirs("features")
+    if not os.path.exists("output"): os.makedirs("output")
+    if not os.path.exists("features"): os.makedirs("features")
     if reset_folders:
         for folder in ["output", "features"]:
             for filename in os.listdir(folder):

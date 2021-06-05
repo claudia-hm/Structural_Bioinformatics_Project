@@ -365,7 +365,7 @@ if __name__ == "__main__":
     parser.add_argument('feature_files', metavar='F', nargs='+',
                         help='Feature files')
     parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
-    parser.add_argument('--reset', action='store_true', help='Empty output and feature folders')
+    parser.add_argument('--reset', action='store_true', help='Empty output, logging and feature folders, except features from task 1')
 
     args = parser.parse_args()
     reset_folders = args.reset
@@ -374,7 +374,9 @@ if __name__ == "__main__":
         logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
     else:
-        logging.basicConfig(filename="task2.log", encoding='utf-8', level=logging.INFO,
+        if not os.path.exists("logging"):
+            os.makedirs("logging")
+        logging.basicConfig(filename="logging/task2.log", encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
 
     if len(args.feature_files) > 1:
