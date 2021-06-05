@@ -77,7 +77,6 @@ def get_secondary_structure(structure):
 
 
 def get_distance_matrix(structure, seq_sep=0):
-
     # Calculate the distance matrix
     distances = []
     for chain in structure:
@@ -299,18 +298,23 @@ def get_variability(list):
 
 
 def create_pymol_image(reprentatives):
-    out_file = "output/pymol_{}".format(pdb_id)
+    structures_name = []
+    k = 20
+    values = []
+    struct_string = ""
+
+    #load pdb in pymol
     cmd.load(pdb_path, pdb_id)
     cmd.split_states(pdb_id, prefix="conf")
     cmd.hide("everything", "all")
 
+    logging.info("Getting variability of representatives")
     variance = get_variability(reprentatives)
-    structures_name = []
 
+    logging.info("Getting pymol representative structure names")
     for struct in reprentatives:
         structures_name.append("conf" + ('%04d' % (struct + 1)))
-    k = 20
-    values = []
+
     for i in range(0, 100 - k):
         sum = 0
         for i in range(i, i + k):
@@ -318,59 +322,46 @@ def create_pymol_image(reprentatives):
         values.append(sum)
     segment_start = np.argmin(values)
     segment_end = segment_start + k
+    strIndx = "& i. {}-{},".format(segment_start, segment_end)
 
-    # string = "show cartoon,"
-    struct_string = ""
+    logging.info("Showing representatives")
     for struct in structures_name:
-        # string += " " + struct
-        #struct_string += "," + struct
-    # print(string)
         cmd.show("cartoon", struct)
 
-    strIndx = "& i. {}-{},".format(segment_start, segment_end)
+    logging.info("Aligning representatives")
     for struct in structures_name[1:]:
-        # str = "align " + struct + " " + strIndx + " " + structures_name[0]
         cmd.align(struct + " " + strIndx, structures_name[0]+ " " + strIndx)
-        # print(str)
-    # string="zoom "
+
+    logging.info("Centering and zooming pymol image")
     cmd.center(structures_name[0]+" "+strIndx)
     cmd.zoom(struct_string)
-    # for struct in structures_name:
-    # string += " " + struct
-    # print("center " + structures_name[0]+ " " +strIndx)
-    # print(string)
-    # print("png foto" + structures_name[0] +".png")
+
+    logging.info("Getting variability for coloring")
     features_var = get_variability(range(0, 199))
     norm = colors.Normalize(vmin=np.min(features_var), vmax=np.max(features_var))
     for i, residue in enumerate(Selection.unfold_entities(ensemble[0], "R")):
         rgb = cm.bwr(norm(features_var[i]))
-        # print(i, residue.id, structure_rmsd_average[i], rgb)
         cmd.set_color("col_{}".format(i), list(rgb)[:3])
         cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
+    logging.info("Dumping pymol image")
     cmd.png("output/{}_pymol_image.png".format(pdb_id))
 
-
-
-
-
 def main():
-    global pdb_id
-    global ensemble
-    global N
-    global M
+    global pdb_id, features, ensemble, N, M
+
+    # load pdb file of the ensemble ensemble
     pdb_id = os.path.basename(pdb_path)[:-4]
     ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
     N,M = get_ensemble_dimension(ensemble)
-    rg = np.zeros(M)
-    global features
 
+    #check if single conformation features file exists before computing (time consuming)
     if os.path.isfile("features/{}_single_conformation_features.json".format(pdb_id)):
         logging.info("Loading single conformation features")
         with open("features/{}_single_conformation_features.json".format(pdb_id)) as f:
             features = json.load(f)
     else:
         logging.info("Computing single conformation features")
-        for i in range(M):
+        for i in range(M): #for every structure compute its features
             id = "{}_{}".format(pdb_id,i)
             features[id] = {}
             logging.info("Structure {} out of {}".format(i,M))
@@ -383,93 +374,77 @@ def main():
         with open("features/{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
             json.dump(features, outfile)
 
-    # logging.info("Showing clustering distance matrix")
-    # plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
-    # plt.show()
+    # check if distance matrix for clustering file exists before computing it (time consuming)
     if os.path.isfile("output/{}_clustering_dm.npy".format(pdb_id)):
-        logging.info("Loading distance matrix for clustering.")
+        logging.info("Loading distance matrix for clustering")
         distanceMatrix = np.load("output/{}_clustering_dm.npy".format(pdb_id))
     else:
-        logging.info("Computing distance matrix for clustering.")
+        logging.info("Computing distance matrix for clustering")
         dg, da, ds, dm = get_distance_matrix_clustering()
         distanceMatrix = l2_distance(dg, da, ds, dm)
 
         max = np.max(distanceMatrix)
         distanceMatrix = distanceMatrix / max
         for i in range(M):
-            logging.info("Structure {} out of {}".format(i, M))
+            logging.info("Clustering distance matrix. Structure {} out of {}".format(i, M))
             distanceMatrix[i][i] = 0
             for j in range(i, M):
                 distanceMatrix[j][i] = distanceMatrix[i][j]
-        #
-
-        logging.info("Saving distance matrix for clustering.")
+        logging.info("Saving distance matrix for clustering")
         np.save("output/{}_clustering_dm.npy".format(pdb_id), distanceMatrix)
 
-    logging.info("Elbow clustering")
+    logging.info("Identify automatically the number of clusters with elbow plot")
     cluster, k, representatives = elbow_clustering(distanceMatrix, 2)
 
+    logging.info("Getting representative distance")
     repDistanceMatrix = np.zeros((k, k))
     for i in range(k):
         for j in range(k):
             repDistanceMatrix[i][j] = distanceMatrix[representatives[i]][representatives[j]]
 
-    #print(representatives)
+    logging.info("Printing graph")
     graph_printer(representatives, repDistanceMatrix)
+    logging.info("Printing graph heatmap")
     graph_heatmap(representatives, repDistanceMatrix)
 
     logging.info("Creating pymol image")
-
-
-
     create_pymol_image(representatives)
     logging.info("Task 1 program end")
-    '''
-    for i in nodes:
-        create_pymol_image(np.where(cluster == i)[0])
-    '''
-        # cmd.set_color("col_{}".format(i), list(rgb)[:3])
-        # cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
-
 
 
 if __name__ == "__main__":
-    import argparse
-    import logging
-    import json
-    import numpy as np
+    import argparse, logging, json, sys, shutil, os, warnings
+    import math, numpy as np, networkx as nx, matplotlib.pyplot as plt
     from Bio.PDB import is_aa, PPBuilder, HSExposureCB
     from Bio.PDB.PDBParser import PDBParser
     from difflib import SequenceMatcher
     from Bio.Cluster import kmedoids
-    import math
-    import argparse
-    import networkx as nx
     from pymol import cmd
-    import os
-    import sys, shutil
-    import matplotlib.pyplot as plt
-    import warnings
-    from Bio.PDB import PDBList, Superimposer, Selection
+    from Bio.PDB import Selection
     from matplotlib import cm, colors
+
     warnings.filterwarnings("ignore")
 
+    # define global variables
     N,M = 0,0
     features = {}
     pdb_id = ""
     ensemble = []
 
-
+    # configure command line arguments
     parser = argparse.ArgumentParser(description='Code for task 1 Structural Bioinformatics Project')
     parser.add_argument('file', metavar='F', nargs=1,
                         help='PDB file path')
     parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
     parser.add_argument('--reset', action='store_true', help='Empty output and feature folders')
 
+    #parse arguments
     args = parser.parse_args()
     pdb_path = args.file[0]
     logging_stdout = args.log_stdout
     reset_folders = args.reset
+
+    #configure logging output
     if logging_stdout:
         logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
@@ -477,8 +452,12 @@ if __name__ == "__main__":
         if not os.path.exists("logging"): os.makedirs("logging")
         logging.basicConfig(filename="logging/task1.log", encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+
+    #checking that required folders exist
     if not os.path.exists("output"): os.makedirs("output")
     if not os.path.exists("features"): os.makedirs("features")
+
+    #cleaning folders if specified
     if reset_folders:
         for folder in ["output", "features"]:
             for filename in os.listdir(folder):
@@ -489,8 +468,8 @@ if __name__ == "__main__":
                     elif os.path.isdir(file_path):
                         shutil.rmtree(file_path)
                 except Exception as e:
-                    print('Failed to delete %s. Reason: %s' % (file_path, e))
+                    logging.error('Failed to delete %s. Reason: %s' % (file_path, e))
 
-
+    #start actual program
     logging.info("Program start")
     main()

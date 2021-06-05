@@ -1,0 +1,418 @@
+2021-06-05 19:15:50,172 INFO: Program start
+2021-06-05 19:15:55,109 INFO: Computing single conformation features
+2021-06-05 19:15:55,110 INFO: Structure 0 out of 200
+2021-06-05 19:15:55,412 INFO: Structure 1 out of 200
+2021-06-05 19:15:55,685 INFO: Structure 2 out of 200
+2021-06-05 19:15:55,959 INFO: Structure 3 out of 200
+2021-06-05 19:15:56,244 INFO: Structure 4 out of 200
+2021-06-05 19:15:56,546 INFO: Structure 5 out of 200
+2021-06-05 19:15:56,821 INFO: Structure 6 out of 200
+2021-06-05 19:15:57,097 INFO: Structure 7 out of 200
+2021-06-05 19:15:57,377 INFO: Structure 8 out of 200
+2021-06-05 19:15:57,654 INFO: Structure 9 out of 200
+2021-06-05 19:15:57,930 INFO: Structure 10 out of 200
+2021-06-05 19:15:58,575 INFO: Structure 11 out of 200
+2021-06-05 19:15:59,401 INFO: Structure 12 out of 200
+2021-06-05 19:16:00,275 INFO: Structure 13 out of 200
+2021-06-05 19:16:00,714 INFO: Structure 14 out of 200
+2021-06-05 19:16:01,051 INFO: Structure 15 out of 200
+2021-06-05 19:16:01,479 INFO: Structure 16 out of 200
+2021-06-05 19:16:01,801 INFO: Structure 17 out of 200
+2021-06-05 19:16:02,102 INFO: Structure 18 out of 200
+2021-06-05 19:16:02,386 INFO: Structure 19 out of 200
+2021-06-05 19:16:02,697 INFO: Structure 20 out of 200
+2021-06-05 19:16:03,097 INFO: Structure 21 out of 200
+2021-06-05 19:16:03,495 INFO: Structure 22 out of 200
+2021-06-05 19:16:04,548 INFO: Structure 23 out of 200
+2021-06-05 19:16:04,914 INFO: Structure 24 out of 200
+2021-06-05 19:16:05,322 INFO: Structure 25 out of 200
+2021-06-05 19:16:05,632 INFO: Structure 26 out of 200
+2021-06-05 19:16:05,922 INFO: Structure 27 out of 200
+2021-06-05 19:16:06,208 INFO: Structure 28 out of 200
+2021-06-05 19:16:06,498 INFO: Structure 29 out of 200
+2021-06-05 19:16:06,794 INFO: Structure 30 out of 200
+2021-06-05 19:16:07,080 INFO: Structure 31 out of 200
+2021-06-05 19:16:07,361 INFO: Structure 32 out of 200
+2021-06-05 19:16:07,656 INFO: Structure 33 out of 200
+2021-06-05 19:16:07,965 INFO: Structure 34 out of 200
+2021-06-05 19:16:08,248 INFO: Structure 35 out of 200
+2021-06-05 19:16:08,544 INFO: Structure 36 out of 200
+2021-06-05 19:16:08,841 INFO: Structure 37 out of 200
+2021-06-05 19:16:09,130 INFO: Structure 38 out of 200
+2021-06-05 19:16:09,431 INFO: Structure 39 out of 200
+2021-06-05 19:16:09,757 INFO: Structure 40 out of 200
+2021-06-05 19:16:10,256 INFO: Structure 41 out of 200
+2021-06-05 19:16:10,647 INFO: Structure 42 out of 200
+2021-06-05 19:16:10,980 INFO: Structure 43 out of 200
+2021-06-05 19:16:11,287 INFO: Structure 44 out of 200
+2021-06-05 19:16:11,564 INFO: Structure 45 out of 200
+2021-06-05 19:16:11,851 INFO: Structure 46 out of 200
+2021-06-05 19:16:12,129 INFO: Structure 47 out of 200
+2021-06-05 19:16:12,407 INFO: Structure 48 out of 200
+2021-06-05 19:16:12,683 INFO: Structure 49 out of 200
+2021-06-05 19:16:12,958 INFO: Structure 50 out of 200
+2021-06-05 19:16:13,262 INFO: Structure 51 out of 200
+2021-06-05 19:16:13,556 INFO: Structure 52 out of 200
+2021-06-05 19:16:13,829 INFO: Structure 53 out of 200
+2021-06-05 19:16:14,109 INFO: Structure 54 out of 200
+2021-06-05 19:16:14,391 INFO: Structure 55 out of 200
+2021-06-05 19:16:14,669 INFO: Structure 56 out of 200
+2021-06-05 19:16:14,956 INFO: Structure 57 out of 200
+2021-06-05 19:16:15,230 INFO: Structure 58 out of 200
+2021-06-05 19:16:15,512 INFO: Structure 59 out of 200
+2021-06-05 19:16:15,785 INFO: Structure 60 out of 200
+2021-06-05 19:16:16,059 INFO: Structure 61 out of 200
+2021-06-05 19:16:16,337 INFO: Structure 62 out of 200
+2021-06-05 19:16:16,621 INFO: Structure 63 out of 200
+2021-06-05 19:16:16,893 INFO: Structure 64 out of 200
+2021-06-05 19:16:17,169 INFO: Structure 65 out of 200
+2021-06-05 19:16:17,445 INFO: Structure 66 out of 200
+2021-06-05 19:16:17,725 INFO: Structure 67 out of 200
+2021-06-05 19:16:18,002 INFO: Structure 68 out of 200
+2021-06-05 19:16:18,288 INFO: Structure 69 out of 200
+2021-06-05 19:16:18,568 INFO: Structure 70 out of 200
+2021-06-05 19:16:18,844 INFO: Structure 71 out of 200
+2021-06-05 19:16:19,121 INFO: Structure 72 out of 200
+2021-06-05 19:16:19,399 INFO: Structure 73 out of 200
+2021-06-05 19:16:19,710 INFO: Structure 74 out of 200
+2021-06-05 19:16:20,434 INFO: Structure 75 out of 200
+2021-06-05 19:16:20,733 INFO: Structure 76 out of 200
+2021-06-05 19:16:21,036 INFO: Structure 77 out of 200
+2021-06-05 19:16:21,343 INFO: Structure 78 out of 200
+2021-06-05 19:16:21,624 INFO: Structure 79 out of 200
+2021-06-05 19:16:21,894 INFO: Structure 80 out of 200
+2021-06-05 19:16:22,172 INFO: Structure 81 out of 200
+2021-06-05 19:16:22,450 INFO: Structure 82 out of 200
+2021-06-05 19:16:22,729 INFO: Structure 83 out of 200
+2021-06-05 19:16:23,002 INFO: Structure 84 out of 200
+2021-06-05 19:16:23,276 INFO: Structure 85 out of 200
+2021-06-05 19:16:23,791 INFO: Structure 86 out of 200
+2021-06-05 19:16:24,158 INFO: Structure 87 out of 200
+2021-06-05 19:16:24,445 INFO: Structure 88 out of 200
+2021-06-05 19:16:24,739 INFO: Structure 89 out of 200
+2021-06-05 19:16:25,024 INFO: Structure 90 out of 200
+2021-06-05 19:16:25,312 INFO: Structure 91 out of 200
+2021-06-05 19:16:25,592 INFO: Structure 92 out of 200
+2021-06-05 19:16:25,871 INFO: Structure 93 out of 200
+2021-06-05 19:16:26,150 INFO: Structure 94 out of 200
+2021-06-05 19:16:26,429 INFO: Structure 95 out of 200
+2021-06-05 19:16:26,714 INFO: Structure 96 out of 200
+2021-06-05 19:16:26,994 INFO: Structure 97 out of 200
+2021-06-05 19:16:27,276 INFO: Structure 98 out of 200
+2021-06-05 19:16:27,559 INFO: Structure 99 out of 200
+2021-06-05 19:16:27,837 INFO: Structure 100 out of 200
+2021-06-05 19:16:28,096 INFO: Structure 101 out of 200
+2021-06-05 19:16:28,374 INFO: Structure 102 out of 200
+2021-06-05 19:16:28,652 INFO: Structure 103 out of 200
+2021-06-05 19:16:28,956 INFO: Structure 104 out of 200
+2021-06-05 19:16:29,240 INFO: Structure 105 out of 200
+2021-06-05 19:16:29,523 INFO: Structure 106 out of 200
+2021-06-05 19:16:29,805 INFO: Structure 107 out of 200
+2021-06-05 19:16:30,083 INFO: Structure 108 out of 200
+2021-06-05 19:16:30,362 INFO: Structure 109 out of 200
+2021-06-05 19:16:30,640 INFO: Structure 110 out of 200
+2021-06-05 19:16:30,924 INFO: Structure 111 out of 200
+2021-06-05 19:16:31,201 INFO: Structure 112 out of 200
+2021-06-05 19:16:31,487 INFO: Structure 113 out of 200
+2021-06-05 19:16:31,761 INFO: Structure 114 out of 200
+2021-06-05 19:16:32,050 INFO: Structure 115 out of 200
+2021-06-05 19:16:32,367 INFO: Structure 116 out of 200
+2021-06-05 19:16:32,647 INFO: Structure 117 out of 200
+2021-06-05 19:16:32,925 INFO: Structure 118 out of 200
+2021-06-05 19:16:33,203 INFO: Structure 119 out of 200
+2021-06-05 19:16:33,486 INFO: Structure 120 out of 200
+2021-06-05 19:16:33,762 INFO: Structure 121 out of 200
+2021-06-05 19:16:34,053 INFO: Structure 122 out of 200
+2021-06-05 19:16:34,330 INFO: Structure 123 out of 200
+2021-06-05 19:16:34,616 INFO: Structure 124 out of 200
+2021-06-05 19:16:34,899 INFO: Structure 125 out of 200
+2021-06-05 19:16:35,171 INFO: Structure 126 out of 200
+2021-06-05 19:16:35,452 INFO: Structure 127 out of 200
+2021-06-05 19:16:35,729 INFO: Structure 128 out of 200
+2021-06-05 19:16:36,005 INFO: Structure 129 out of 200
+2021-06-05 19:16:36,280 INFO: Structure 130 out of 200
+2021-06-05 19:16:36,557 INFO: Structure 131 out of 200
+2021-06-05 19:16:36,830 INFO: Structure 132 out of 200
+2021-06-05 19:16:37,110 INFO: Structure 133 out of 200
+2021-06-05 19:16:37,387 INFO: Structure 134 out of 200
+2021-06-05 19:16:37,666 INFO: Structure 135 out of 200
+2021-06-05 19:16:37,941 INFO: Structure 136 out of 200
+2021-06-05 19:16:38,216 INFO: Structure 137 out of 200
+2021-06-05 19:16:38,493 INFO: Structure 138 out of 200
+2021-06-05 19:16:38,765 INFO: Structure 139 out of 200
+2021-06-05 19:16:39,046 INFO: Structure 140 out of 200
+2021-06-05 19:16:39,317 INFO: Structure 141 out of 200
+2021-06-05 19:16:39,597 INFO: Structure 142 out of 200
+2021-06-05 19:16:39,869 INFO: Structure 143 out of 200
+2021-06-05 19:16:40,146 INFO: Structure 144 out of 200
+2021-06-05 19:16:40,419 INFO: Structure 145 out of 200
+2021-06-05 19:16:40,698 INFO: Structure 146 out of 200
+2021-06-05 19:16:40,974 INFO: Structure 147 out of 200
+2021-06-05 19:16:41,275 INFO: Structure 148 out of 200
+2021-06-05 19:16:41,556 INFO: Structure 149 out of 200
+2021-06-05 19:16:41,834 INFO: Structure 150 out of 200
+2021-06-05 19:16:42,114 INFO: Structure 151 out of 200
+2021-06-05 19:16:42,441 INFO: Structure 152 out of 200
+2021-06-05 19:16:42,737 INFO: Structure 153 out of 200
+2021-06-05 19:16:43,007 INFO: Structure 154 out of 200
+2021-06-05 19:16:43,279 INFO: Structure 155 out of 200
+2021-06-05 19:16:43,593 INFO: Structure 156 out of 200
+2021-06-05 19:16:43,884 INFO: Structure 157 out of 200
+2021-06-05 19:16:44,164 INFO: Structure 158 out of 200
+2021-06-05 19:16:44,441 INFO: Structure 159 out of 200
+2021-06-05 19:16:44,723 INFO: Structure 160 out of 200
+2021-06-05 19:16:44,997 INFO: Structure 161 out of 200
+2021-06-05 19:16:45,270 INFO: Structure 162 out of 200
+2021-06-05 19:16:45,540 INFO: Structure 163 out of 200
+2021-06-05 19:16:45,813 INFO: Structure 164 out of 200
+2021-06-05 19:16:46,092 INFO: Structure 165 out of 200
+2021-06-05 19:16:46,364 INFO: Structure 166 out of 200
+2021-06-05 19:16:46,641 INFO: Structure 167 out of 200
+2021-06-05 19:16:46,910 INFO: Structure 168 out of 200
+2021-06-05 19:16:47,181 INFO: Structure 169 out of 200
+2021-06-05 19:16:47,452 INFO: Structure 170 out of 200
+2021-06-05 19:16:47,727 INFO: Structure 171 out of 200
+2021-06-05 19:16:47,996 INFO: Structure 172 out of 200
+2021-06-05 19:16:48,269 INFO: Structure 173 out of 200
+2021-06-05 19:16:48,540 INFO: Structure 174 out of 200
+2021-06-05 19:16:48,824 INFO: Structure 175 out of 200
+2021-06-05 19:16:49,110 INFO: Structure 176 out of 200
+2021-06-05 19:16:49,386 INFO: Structure 177 out of 200
+2021-06-05 19:16:49,708 INFO: Structure 178 out of 200
+2021-06-05 19:16:49,986 INFO: Structure 179 out of 200
+2021-06-05 19:16:50,260 INFO: Structure 180 out of 200
+2021-06-05 19:16:50,530 INFO: Structure 181 out of 200
+2021-06-05 19:16:50,905 INFO: Structure 182 out of 200
+2021-06-05 19:16:51,261 INFO: Structure 183 out of 200
+2021-06-05 19:16:51,695 INFO: Structure 184 out of 200
+2021-06-05 19:16:52,183 INFO: Structure 185 out of 200
+2021-06-05 19:16:52,464 INFO: Structure 186 out of 200
+2021-06-05 19:16:52,750 INFO: Structure 187 out of 200
+2021-06-05 19:16:53,030 INFO: Structure 188 out of 200
+2021-06-05 19:16:53,306 INFO: Structure 189 out of 200
+2021-06-05 19:16:53,578 INFO: Structure 190 out of 200
+2021-06-05 19:16:53,852 INFO: Structure 191 out of 200
+2021-06-05 19:16:54,124 INFO: Structure 192 out of 200
+2021-06-05 19:16:54,412 INFO: Structure 193 out of 200
+2021-06-05 19:16:54,698 INFO: Structure 194 out of 200
+2021-06-05 19:16:54,973 INFO: Structure 195 out of 200
+2021-06-05 19:16:55,240 INFO: Structure 196 out of 200
+2021-06-05 19:16:55,531 INFO: Structure 197 out of 200
+2021-06-05 19:16:55,809 INFO: Structure 198 out of 200
+2021-06-05 19:16:56,078 INFO: Structure 199 out of 200
+2021-06-05 19:16:56,353 INFO: Dumping single conformation features to file
+2021-06-05 19:17:01,280 INFO: Computing distance matrix for clustering
+2021-06-05 19:18:21,012 INFO: Clustering distance matrix. Structure 0 out of 200
+2021-06-05 19:18:21,016 INFO: Clustering distance matrix. Structure 1 out of 200
+2021-06-05 19:18:21,017 INFO: Clustering distance matrix. Structure 2 out of 200
+2021-06-05 19:18:21,017 INFO: Clustering distance matrix. Structure 3 out of 200
+2021-06-05 19:18:21,018 INFO: Clustering distance matrix. Structure 4 out of 200
+2021-06-05 19:18:21,018 INFO: Clustering distance matrix. Structure 5 out of 200
+2021-06-05 19:18:21,018 INFO: Clustering distance matrix. Structure 6 out of 200
+2021-06-05 19:18:21,019 INFO: Clustering distance matrix. Structure 7 out of 200
+2021-06-05 19:18:21,019 INFO: Clustering distance matrix. Structure 8 out of 200
+2021-06-05 19:18:21,019 INFO: Clustering distance matrix. Structure 9 out of 200
+2021-06-05 19:18:21,019 INFO: Clustering distance matrix. Structure 10 out of 200
+2021-06-05 19:18:21,020 INFO: Clustering distance matrix. Structure 11 out of 200
+2021-06-05 19:18:21,020 INFO: Clustering distance matrix. Structure 12 out of 200
+2021-06-05 19:18:21,020 INFO: Clustering distance matrix. Structure 13 out of 200
+2021-06-05 19:18:21,020 INFO: Clustering distance matrix. Structure 14 out of 200
+2021-06-05 19:18:21,021 INFO: Clustering distance matrix. Structure 15 out of 200
+2021-06-05 19:18:21,021 INFO: Clustering distance matrix. Structure 16 out of 200
+2021-06-05 19:18:21,021 INFO: Clustering distance matrix. Structure 17 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 18 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 19 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 20 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 21 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 22 out of 200
+2021-06-05 19:18:21,022 INFO: Clustering distance matrix. Structure 23 out of 200
+2021-06-05 19:18:21,023 INFO: Clustering distance matrix. Structure 24 out of 200
+2021-06-05 19:18:21,023 INFO: Clustering distance matrix. Structure 25 out of 200
+2021-06-05 19:18:21,023 INFO: Clustering distance matrix. Structure 26 out of 200
+2021-06-05 19:18:21,023 INFO: Clustering distance matrix. Structure 27 out of 200
+2021-06-05 19:18:21,023 INFO: Clustering distance matrix. Structure 28 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 29 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 30 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 31 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 32 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 33 out of 200
+2021-06-05 19:18:21,024 INFO: Clustering distance matrix. Structure 34 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 35 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 36 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 37 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 38 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 39 out of 200
+2021-06-05 19:18:21,025 INFO: Clustering distance matrix. Structure 40 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 41 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 42 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 43 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 44 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 45 out of 200
+2021-06-05 19:18:21,026 INFO: Clustering distance matrix. Structure 46 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 47 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 48 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 49 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 50 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 51 out of 200
+2021-06-05 19:18:21,027 INFO: Clustering distance matrix. Structure 52 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 53 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 54 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 55 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 56 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 57 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 58 out of 200
+2021-06-05 19:18:21,028 INFO: Clustering distance matrix. Structure 59 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 60 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 61 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 62 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 63 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 64 out of 200
+2021-06-05 19:18:21,029 INFO: Clustering distance matrix. Structure 65 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 66 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 67 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 68 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 69 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 70 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 71 out of 200
+2021-06-05 19:18:21,030 INFO: Clustering distance matrix. Structure 72 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 73 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 74 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 75 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 76 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 77 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 78 out of 200
+2021-06-05 19:18:21,031 INFO: Clustering distance matrix. Structure 79 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 80 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 81 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 82 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 83 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 84 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 85 out of 200
+2021-06-05 19:18:21,032 INFO: Clustering distance matrix. Structure 86 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 87 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 88 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 89 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 90 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 91 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 92 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 93 out of 200
+2021-06-05 19:18:21,033 INFO: Clustering distance matrix. Structure 94 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 95 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 96 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 97 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 98 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 99 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 100 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 101 out of 200
+2021-06-05 19:18:21,034 INFO: Clustering distance matrix. Structure 102 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 103 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 104 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 105 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 106 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 107 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 108 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 109 out of 200
+2021-06-05 19:18:21,035 INFO: Clustering distance matrix. Structure 110 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 111 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 112 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 113 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 114 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 115 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 116 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 117 out of 200
+2021-06-05 19:18:21,036 INFO: Clustering distance matrix. Structure 118 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 119 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 120 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 121 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 122 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 123 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 124 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 125 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 126 out of 200
+2021-06-05 19:18:21,037 INFO: Clustering distance matrix. Structure 127 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 128 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 129 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 130 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 131 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 132 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 133 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 134 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 135 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 136 out of 200
+2021-06-05 19:18:21,038 INFO: Clustering distance matrix. Structure 137 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 138 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 139 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 140 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 141 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 142 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 143 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 144 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 145 out of 200
+2021-06-05 19:18:21,039 INFO: Clustering distance matrix. Structure 146 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 147 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 148 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 149 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 150 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 151 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 152 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 153 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 154 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 155 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 156 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 157 out of 200
+2021-06-05 19:18:21,040 INFO: Clustering distance matrix. Structure 158 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 159 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 160 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 161 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 162 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 163 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 164 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 165 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 166 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 167 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 168 out of 200
+2021-06-05 19:18:21,041 INFO: Clustering distance matrix. Structure 169 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 170 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 171 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 172 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 173 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 174 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 175 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 176 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 177 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 178 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 179 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 180 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 181 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 182 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 183 out of 200
+2021-06-05 19:18:21,042 INFO: Clustering distance matrix. Structure 184 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 185 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 186 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 187 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 188 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 189 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 190 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 191 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 192 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 193 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 194 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 195 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 196 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 197 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 198 out of 200
+2021-06-05 19:18:21,043 INFO: Clustering distance matrix. Structure 199 out of 200
+2021-06-05 19:18:21,043 INFO: Saving distance matrix for clustering
+2021-06-05 19:18:21,071 INFO: Identify automatically the number of clusters with elbow plot
+2021-06-05 19:18:24,740 INFO: Getting representative distance
+2021-06-05 19:18:24,741 INFO: Printing graph
+2021-06-05 19:18:25,743 INFO: Printing graph heatmap
+2021-06-05 19:18:26,782 INFO: Creating pymol image
+2021-06-05 19:18:31,152 INFO: Getting variability of representatives
+2021-06-05 19:18:31,178 INFO: Getting pymol representative structure names
+2021-06-05 19:18:31,181 INFO: Showing representatives
+2021-06-05 19:18:31,323 INFO: Aligning representatives
+2021-06-05 19:18:33,153 INFO: Centering and zooming pymol image
+2021-06-05 19:18:33,200 INFO: Getting variability for coloring
+2021-06-05 19:18:37,902 INFO: Dumping pymol image
+2021-06-05 19:18:55,116 INFO: Task 1 program end

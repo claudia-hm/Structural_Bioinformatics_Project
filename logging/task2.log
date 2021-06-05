@@ -1,19 +1,31 @@
-2021-06-05 18:42:17,559 INFO: Program start
-2021-06-05 18:42:17,559 INFO: Parsing file: features/PED00153e007_single_conformation_features.json
-2021-06-05 18:42:19,218 INFO: Computing ensemble features.PDB id: PED00153e007
-2021-06-05 18:42:32,427 INFO: Dumping ensemble features features to file. PDB id: PED00153e007
-2021-06-05 18:42:32,490 INFO: Parsing file: features/PED00153e008_single_conformation_features.json
-2021-06-05 18:42:34,356 INFO: Computing ensemble features.PDB id: PED00153e008
-2021-06-05 18:42:50,604 INFO: Dumping ensemble features features to file. PDB id: PED00153e008
-2021-06-05 18:42:50,694 INFO: Computing global scores
-2021-06-05 18:42:50,694 INFO: Computing global score between ensemble
-2021-06-05 18:42:50,696 INFO: Computing global score between ensemble
-2021-06-05 18:42:50,698 INFO: Computing global score between ensemble
-2021-06-05 18:42:50,699 INFO: Computing global score between ensemble
-2021-06-05 18:42:50,701 INFO: Creating global score heatmap
-2021-06-05 18:42:51,318 INFO: Plotting local score
-2021-06-05 18:42:51,318 INFO: Computing RSMD local score
-2021-06-05 18:42:51,319 INFO: Computing rASA local score
-2021-06-05 18:42:51,319 INFO: Computing SS entropy local score
-2021-06-05 18:42:51,319 INFO: Creating local score plot
-2021-06-05 18:42:52,344 INFO: Task 2 program end
+2021-06-05 19:19:18,401 INFO: Program start
+2021-06-05 19:19:18,402 INFO: Parsing file: features/PED00153e007_single_conformation_features.json
+2021-06-05 19:19:19,920 INFO: Computing ensemble features.PDB id: PED00153e007
+2021-06-05 19:19:19,920 INFO: Computing radius of gyration
+2021-06-05 19:19:19,921 INFO: Computing Secondary Structure entropy
+2021-06-05 19:19:19,948 INFO: Computing median solvent accessibility 
+2021-06-05 19:19:19,966 INFO: Computing median RSMD 
+2021-06-05 19:19:32,837 INFO: Computing median distance
+2021-06-05 19:19:34,874 INFO: Computing standard deviation distance
+2021-06-05 19:19:36,353 INFO: Dumping ensemble features features to file. PDB id: PED00153e007
+2021-06-05 19:19:36,419 INFO: Parsing file: features/PED00153e008_single_conformation_features.json
+2021-06-05 19:19:37,793 INFO: Computing ensemble features.PDB id: PED00153e008
+2021-06-05 19:19:37,796 INFO: Computing radius of gyration
+2021-06-05 19:19:37,800 INFO: Computing Secondary Structure entropy
+2021-06-05 19:19:37,831 INFO: Computing median solvent accessibility 
+2021-06-05 19:19:37,848 INFO: Computing median RSMD 
+2021-06-05 19:19:48,580 INFO: Computing median distance
+2021-06-05 19:19:50,112 INFO: Computing standard deviation distance
+2021-06-05 19:19:51,284 INFO: Dumping ensemble features features to file. PDB id: PED00153e008
+2021-06-05 19:19:51,351 INFO: Computing global scores
+2021-06-05 19:19:51,351 INFO: Computing global score between ensemble
+2021-06-05 19:19:51,353 INFO: Computing global score between ensemble
+2021-06-05 19:19:51,354 INFO: Computing global score between ensemble
+2021-06-05 19:19:51,356 INFO: Computing global score between ensemble
+2021-06-05 19:19:51,357 INFO: Creating global score heatmap
+2021-06-05 19:19:52,727 INFO: Plotting local score
+2021-06-05 19:19:52,728 INFO: Computing RSMD local score
+2021-06-05 19:19:52,729 INFO: Computing rASA local score
+2021-06-05 19:19:52,729 INFO: Computing SS entropy local score
+2021-06-05 19:19:52,729 INFO: Creating local score plot
+2021-06-05 19:19:53,869 INFO: Task 2 program end
