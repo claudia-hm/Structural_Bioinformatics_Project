@@ -103,6 +103,7 @@ def get_single_conformation_features(structure):
 
     return rg, rasa, ss, dm
 
+
 def mseDistanceMatrix(matrix1, matrix2):
     array1 = np.asarray(matrix1)
     array2 = np.asarray(matrix2)
@@ -113,58 +114,64 @@ def mseDistanceMatrix(matrix1, matrix2):
 
 
 def meanDifferenceRASA(asa1, asa2):
-    array1=np.asarray(asa1)
-    array2=np.asarray(asa2)
+    array1 = np.asarray(asa1)
+    array2 = np.asarray(asa2)
     return np.abs(array1.mean() - array2.mean())
 
+
 def ssNumberOfDismatch(ss1, ss2):
-    str1=''.join(ss1)
-    str2=''.join(ss2)
-    return 1 - SequenceMatcher(None, a=str1, b= str2).ratio()
+    str1 = ''.join(ss1)
+    str2 = ''.join(ss2)
+    val = 1 - SequenceMatcher(None, a=str1, b=str2).ratio()
+    return val
+
 
 def getResidueRGdistanceMatrix():
-    dgMat = np.zeros((M,M))
+    dgMat = np.zeros((M, M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id,i)
-        for j in range(i,M):
-            jd = "{}_{}".format(pdb_id,j)
-            dgMat[i][j]=np.abs(np.subtract(features[id]['radius_of_giration'] , features[jd]['radius_of_giration']))
-    max = np.max(dgMat)
-    min = np.min(dgMat)
-    return np.divide(dgMat-min,max-min)
+        id = "{}_{}".format(pdb_id, i)
+        for j in range(i, M):
+            jd = "{}_{}".format(pdb_id, j)
+            dgMat[i][j] = np.abs(np.subtract(features[id]['radius_of_giration'], features[jd]['radius_of_giration']))
+    u = np.mean(dgMat)
+    o = np.std(dgMat)
+    return np.divide(dgMat - u, o)
+
 
 def getResidueASAdistanceMatrix():
-    asaMat = np.zeros((M,M))
+    asaMat = np.zeros((M, M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id,i)
-        for j in range(i,M):
-            jd = "{}_{}".format(pdb_id,j)
-            asaMat[i][j]=meanDifferenceRASA(features[id]['relative_asas'],features[jd]['relative_asas'])
-    max = np.max(asaMat)
-    min = np.min(asaMat)
-    return np.divide(asaMat-min,max-min)
+        id = "{}_{}".format(pdb_id, i)
+        for j in range(i, M):
+            jd = "{}_{}".format(pdb_id, j)
+            asaMat[i][j] = meanDifferenceRASA(features[id]['relative_asas'], features[jd]['relative_asas'])
+    u = np.mean(asaMat)
+    o = np.std(asaMat)
+    return np.divide(asaMat - u, o)
+
 
 def getResidueSSdistanceMatrix():
-    ssMat = np.zeros((M,M))
+    ssMat = np.zeros((M, M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id,i)
-        for j in range(i,M):
-            jd = "{}_{}".format(pdb_id,j)
-            ssMat[i][j]=ssNumberOfDismatch(features[id]['secondary_structure'],features[jd]['secondary_structure'])
-    max = np.max(ssMat)
-    min = np.min(ssMat)
-    return np.divide(ssMat-min,max-min)
+        id = "{}_{}".format(pdb_id, i)
+        for j in range(i, M):
+            jd = "{}_{}".format(pdb_id, j)
+            ssMat[i][j] = ssNumberOfDismatch(features[id]['secondary_structure'], features[jd]['secondary_structure'])
+    u = np.mean(ssMat)
+    o = np.std(ssMat)
+    return np.divide(ssMat - u, o)
+
 
 def getResidueDMdistanceMatrix():
-    distMat = np.zeros((M,M))
+    distMat = np.zeros((M, M))
     for i in range(M):
-        id = "{}_{}".format(pdb_id,i)
-        for j in range(i,M):
-            jd = "{}_{}".format(pdb_id,j)
-            distMat[i][j]=mseDistanceMatrix(features[id]['distance_matrix'],features[jd]['distance_matrix'])
-    max = np.max(distMat)
-    min = np.min(distMat)
-    return np.divide(distMat,max)
+        id = "{}_{}".format(pdb_id, i)
+        for j in range(i, M):
+            jd = "{}_{}".format(pdb_id, j)
+            distMat[i][j] = mseDistanceMatrix(features[id]['distance_matrix'], features[jd]['distance_matrix'])
+    u = np.mean(distMat)
+    o = np.std(distMat)
+    return np.divide(distMat - u, o)
 
 def get_distance_matrix_clustering():
     dg = getResidueRGdistanceMatrix()
@@ -268,30 +275,113 @@ def graph_printer(nodes,distanceMatrix):
     plt.savefig('output/{}_graph.png'.format(pdb_id))
 
 
+def get_variability(list):
+    test = np.zeros((len(list), N))
+    var = []
+    k = 0
+    for i in list:
+        id = "{}_{}".format(pdb_id, i)
+        test[k] = features[id]['relative_asas']
+        k = k + 1
+    for i in range(N):
+        var.append(np.std(test.T[i]))
+
+    var2 = []
+    k = 0
+    for i in list:
+        id = "{}_{}".format(pdb_id, i)
+        test[k] = np.sum(features[id]['distance_matrix'], axis=1)
+        k = k + 1
+    for i in range(N):
+        var2.append(np.std(test.T[i]))
+
+    return var
+
+
+def create_pymol_image(reprentatives):
+    out_file = "output/pymol_{}".format(pdb_id)
+    cmd.load(pdb_path, pdb_id)
+    cmd.split_states(pdb_id, prefix="conf")
+    cmd.hide("everything", "all")
+
+    variance = get_variability(reprentatives)
+    structures_name = []
+
+    for struct in reprentatives:
+        structures_name.append("conf" + ('%04d' % (struct + 1)))
+    k = 20
+    values = []
+    for i in range(0, 100 - k):
+        sum = 0
+        for i in range(i, i + k):
+            sum += variance[i]
+        values.append(sum)
+    segment_start = np.argmin(values)
+    segment_end = segment_start + k
+
+    # string = "show cartoon,"
+    struct_string = ""
+    for struct in structures_name:
+        # string += " " + struct
+        #struct_string += "," + struct
+    # print(string)
+        cmd.show("cartoon", struct)
+
+    strIndx = "& i. {}-{},".format(segment_start, segment_end)
+    for struct in structures_name[1:]:
+        # str = "align " + struct + " " + strIndx + " " + structures_name[0]
+        cmd.align(struct + " " + strIndx, structures_name[0]+ " " + strIndx)
+        # print(str)
+    # string="zoom "
+    cmd.center(structures_name[0]+" "+strIndx)
+    cmd.zoom(struct_string)
+    # for struct in structures_name:
+    # string += " " + struct
+    # print("center " + structures_name[0]+ " " +strIndx)
+    # print(string)
+    # print("png foto" + structures_name[0] +".png")
+    features_var = get_variability(range(0, 199))
+    norm = colors.Normalize(vmin=np.min(features_var), vmax=np.max(features_var))
+    for i, residue in enumerate(Selection.unfold_entities(ensemble[0], "R")):
+        rgb = cm.bwr(norm(features_var[i]))
+        # print(i, residue.id, structure_rmsd_average[i], rgb)
+        cmd.set_color("col_{}".format(i), list(rgb)[:3])
+        cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
+    cmd.png("output/pymol_image_{}.png".format(pdb_id))
+
+
+
+
 
 def main():
     global pdb_id
-    pdb_id = os.path.basename(pdb_path)[:-4]
-    ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
+    global ensemble
     global N
     global M
+    pdb_id = os.path.basename(pdb_path)[:-4]
+    ensemble = PDBParser(QUIET=True).get_structure(pdb_id, pdb_path)
     N,M = get_ensemble_dimension(ensemble)
     rg = np.zeros(M)
     global features
 
-    logging.info("Computing single conformation features")
-    for i in range(M):
-        id = "{}_{}".format(pdb_id,i)
-        features[id] = {}
-        logging.info("Structure {} out of {}".format(i,M))
-        features[id]['radius_of_giration'] = get_radius_of_gyration(ensemble[i])
-        features[id]['relative_asas'] = get_relative_asas(ensemble[i]).tolist()
-        features[id]['secondary_structure'] = list(get_secondary_structure(ensemble[i]))
-        features[id]['distance_matrix'] =get_distance_matrix(ensemble[i]).tolist()
+    if os.path.isfile("features/{}_single_conformation_features.json".format(pdb_id)):
+        logging.info("Loading single conformation features")
+        with open("features/{}_single_conformation_features.json".format(pdb_id)) as f:
+            features = json.load(f)
+    else:
+        logging.info("Computing single conformation features")
+        for i in range(M):
+            id = "{}_{}".format(pdb_id,i)
+            features[id] = {}
+            logging.info("Structure {} out of {}".format(i,M))
+            features[id]['radius_of_giration'] = get_radius_of_gyration(ensemble[i])
+            features[id]['relative_asas'] = get_relative_asas(ensemble[i]).tolist()
+            features[id]['secondary_structure'] = list(get_secondary_structure(ensemble[i]))
+            features[id]['distance_matrix'] =get_distance_matrix(ensemble[i]).tolist()
 
-    logging.info("Dumping single conformation features to file")
-    with open("features/{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
-        json.dump(features, outfile)
+        logging.info("Dumping single conformation features to file")
+        with open("features/{}_single_conformation_features.json".format(pdb_id),'w') as outfile:
+            json.dump(features, outfile)
 
     # logging.info("Showing clustering distance matrix")
     # plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
@@ -328,7 +418,21 @@ def main():
     #print(representatives)
     graph_printer(representatives, repDistanceMatrix)
     graph_heatmap(representatives, repDistanceMatrix)
+
+    logging.info("Creating pymol image")
+
+
+
+    create_pymol_image(representatives)
     logging.info("Task 1 program end")
+    '''
+    for i in nodes:
+        create_pymol_image(np.where(cluster == i)[0])
+    '''
+        # cmd.set_color("col_{}".format(i), list(rgb)[:3])
+        # cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
+
+
 
 if __name__ == "__main__":
     import argparse
@@ -342,15 +446,19 @@ if __name__ == "__main__":
     import math
     import argparse
     import networkx as nx
+    from pymol import cmd
     import os
     import sys
     import matplotlib.pyplot as plt
     import warnings
+    from Bio.PDB import PDBList, Superimposer, Selection
+    from matplotlib import cm, colors
     warnings.filterwarnings("ignore")
 
     N,M = 0,0
     features = {}
     pdb_id = ""
+    ensemble = []
 
 
     parser = argparse.ArgumentParser(description='Code for task 1 Structural Bioinformatics Project')
