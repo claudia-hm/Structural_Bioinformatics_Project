@@ -1,4 +1,24 @@
-# Structural_Bioinformatics_Project
+# Structural Bioinformatics Project: Conformational analysis of protein structural ensembles
+Claudia Herron Mulet (2029817), Leonardo Amato (2028621) and Matteo Marchesin (1234385)
+
+## Description
+This Github repository contains the software required to complete Tasks 1 and 2 of the final project of Structural Bioinformatics.
+
+## Requirements 
+The following python modules are required to execute the code:
+*argparse, logging, json, os, sys, shutil, warnings, numpy, matplotlib, Bio, math, networkx, difflib, pymol*
+
+## Usage
+1. Download this repository 
+2. ```cd  Structural_Bioinformatics_Project```
+3. Load ensemble pdb files into ```data``` directory. The files must the original name from [PED](https://proteinensemble.org), e.g., ```PED00153e007.pdb````
+4. Run ```task1.py``` providing as input the path to the PDB file: ```python task1.py pdb_file```, e.g,  ```python task1.py data/PED00153e007.pdb```
+5. Run ```task2.py``` providing as input the path to the feature files generated in Task 1: ```python task2.py feature_file_1 feature_file_2 ...```, e.g., ```python task2.py features/PED00153e007_single_conformation_features.json features/PED00153e008_single_conformation_features.json````
+6. Both python files output their results to the folders ```output```and ```features```folders. In addition, they can be called using the following flags:
+  * ```--log_stdout```: redirects the logging information to the standard output. When not present, the logging information is printed to the files ```task1.log```and ```task2.log```.
+  * ```--reset```: when present, the program cleans the content of the ```features```and ```output``` folders, except those needed files for the execution.
+
+
 
 ### Report 
 https://docs.google.com/document/d/1sXajmJBS4c28_oSMq_bLZYVMLse5mOQzaHyH4lh0vFQ/edit?usp=sharing
