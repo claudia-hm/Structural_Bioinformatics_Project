@@ -231,14 +231,6 @@ def get_ss_entropy_local_score(pdb_ids, ensembles_features):
             rmsd_local_score[(pdb_ids[ens1], pdb_ids[ens2])] = np.abs(np.subtract(rmsd1,rmsd2))
     return rmsd_local_score
 
-def get_local_score(pdb_ids, ensembles_features):
-    global_score = np.zeros((len(pdb_ids), len(pdb_ids)))
-    for ens1 in range(len(pdb_ids)):
-        for ens2 in range(len(pdb_ids)):
-            #print("computing score between: ", ens1, ens2 )
-            global_score[ens1][ens2] = compute_global_score(med_mats[ens1], med_mats[ens2])
-    return global_score
-
 
 def plot_local_score(pdb_ids, ensembles_features, ens1, ens2):
     logging.info("Computing RSMD local score")
@@ -360,12 +352,11 @@ if __name__ == "__main__":
     import json
     import numpy as np
     from Bio.PDB import PDBList, Superimposer, is_aa, PPBuilder, HSExposureCB
-    from Bio.PDB.DSSP import DSSP
     from Bio.PDB.PDBParser import PDBParser
     import requests
     import math
     import matplotlib.pyplot as plt
-    import argparse, os, sys
+    import argparse, os, sys, shutil
 
 
     N,M = 0,0
@@ -374,9 +365,10 @@ if __name__ == "__main__":
     parser.add_argument('feature_files', metavar='F', nargs='+',
                         help='Feature files')
     parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
+    parser.add_argument('--reset', action='store_true', help='Empty output and feature folders')
 
     args = parser.parse_args()
-
+    reset_folders = args.reset
     logging_stdout = args.log_stdout
     if logging_stdout:
         logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
@@ -387,6 +379,23 @@ if __name__ == "__main__":
 
     if len(args.feature_files) > 1:
         feature_files = args.feature_files
+
+        if not os.path.exists("output"):
+            os.makedirs("output")
+        if not os.path.exists("features"):
+            os.makedirs("features")
+        if reset_folders:
+            for folder in ["output", "features"]:
+                for filename in os.listdir(folder):
+                    file_path = os.path.join(folder, filename)
+                    if file_path not in feature_files:
+                        try:
+                            if os.path.isfile(file_path) or os.path.islink(file_path):
+                                os.unlink(file_path)
+                            elif os.path.isdir(file_path):
+                                shutil.rmtree(file_path)
+                        except Exception as e:
+                            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
         logging.info("Program start")
         main()

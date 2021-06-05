@@ -206,7 +206,7 @@ def elbow_clustering(distanceMatrix,elbowErr):
     plt.xlabel("Number of clusters")
     plt.ylabel("Smoothed error")
     plt.title("Elbow plot")
-    plt.savefig("output/elbow_plot_{}.png".format(pdb_id))
+    plt.savefig("output/{}_elbow_plot.png".format(pdb_id))
     inertia = []
     inertia_smooth = []
     for i in range(maxCluster - 1):
@@ -270,7 +270,7 @@ def graph_printer(nodes,distanceMatrix):
     nx.draw_networkx_edge_labels(G,pos,edge_labels=dge_labels)
     nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.5)
 
-    nx.write_edgelist(G, "output/text_graph_{}".format(pdb_id))
+    nx.write_edgelist(G, "output/{}_text_graph".format(pdb_id))
 
     plt.savefig('output/{}_graph.png'.format(pdb_id))
 
@@ -347,7 +347,7 @@ def create_pymol_image(reprentatives):
         # print(i, residue.id, structure_rmsd_average[i], rgb)
         cmd.set_color("col_{}".format(i), list(rgb)[:3])
         cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
-    cmd.png("output/pymol_image_{}.png".format(pdb_id))
+    cmd.png("output/{}_pymol_image.png".format(pdb_id))
 
 
 
@@ -386,9 +386,9 @@ def main():
     # logging.info("Showing clustering distance matrix")
     # plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
     # plt.show()
-    if os.path.isfile("output/clustering_dm_{}.npy".format(pdb_id)):
+    if os.path.isfile("output/{}_clustering_dm.npy".format(pdb_id)):
         logging.info("Loading distance matrix for clustering.")
-        distanceMatrix = np.load("output/clustering_dm_{}.npy".format(pdb_id))
+        distanceMatrix = np.load("output/{}_clustering_dm.npy".format(pdb_id))
     else:
         logging.info("Computing distance matrix for clustering.")
         dg, da, ds, dm = get_distance_matrix_clustering()
@@ -402,10 +402,9 @@ def main():
             for j in range(i, M):
                 distanceMatrix[j][i] = distanceMatrix[i][j]
         #
-        if not os.path.exists("output"):
-            os.makedirs("output")
+
         logging.info("Saving distance matrix for clustering.")
-        np.save("output/clustering_dm_{}.npy".format(pdb_id), distanceMatrix)
+        np.save("output/{}_clustering_dm.npy".format(pdb_id), distanceMatrix)
 
     logging.info("Elbow clustering")
     cluster, k, representatives = elbow_clustering(distanceMatrix, 2)
@@ -448,7 +447,7 @@ if __name__ == "__main__":
     import networkx as nx
     from pymol import cmd
     import os
-    import sys
+    import sys, shutil
     import matplotlib.pyplot as plt
     import warnings
     from Bio.PDB import PDBList, Superimposer, Selection
@@ -465,16 +464,34 @@ if __name__ == "__main__":
     parser.add_argument('file', metavar='F', nargs=1,
                         help='PDB file path')
     parser.add_argument('--log_stdout', action='store_true', help='Print logging info to standard output')
+    parser.add_argument('--reset', action='store_true', help='Empty output and feature folders')
 
     args = parser.parse_args()
     pdb_path = args.file[0]
     logging_stdout = args.log_stdout
+    reset_folders = args.reset
     if logging_stdout:
         logging.basicConfig(stream=sys.stdout, encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
     else:
         logging.basicConfig(filename="task1.log", encoding='utf-8', level=logging.INFO,
                             format="%(asctime)s %(levelname)s: %(message)s", filemode='w')
+    if not os.path.exists("output"):
+        os.makedirs("output")
+    if not os.path.exists("features"):
+        os.makedirs("features")
+    if reset_folders:
+        for folder in ["output", "features"]:
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+                try:
+                    if os.path.isfile(file_path) or os.path.islink(file_path):
+                        os.unlink(file_path)
+                    elif os.path.isdir(file_path):
+                        shutil.rmtree(file_path)
+                except Exception as e:
+                    print('Failed to delete %s. Reason: %s' % (file_path, e))
+
 
     logging.info("Program start")
     main()
