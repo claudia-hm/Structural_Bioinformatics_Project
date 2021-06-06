@@ -235,36 +235,36 @@ def plot_local_score(pdb_ids, ensembles_features, ens1, ens2):
     fig.suptitle("Local scores {}_{}".format(pdb_ids[ens1], pdb_ids[ens2]))
     fig.set_figheight(10)
     fig.set_figwidth(20)
-    ax1[0].plot(range(95), median_rsmd2, color='#990000', linewidth=1, label=pdb_ids[ens1])
-    ax1[0].plot(range(95), median_rsmd1, color='#000099', linewidth=1, label=pdb_ids[ens2])
-    ax1[0].fill_between(range(95), median_rsmd1, median_rsmd2, where=median_rsmd2 <= median_rsmd1, facecolor='#dddddd',
+    ax1[0].plot(range(N-5), median_rsmd2, color='#990000', linewidth=1, label=pdb_ids[ens1])
+    ax1[0].plot(range(N-5), median_rsmd1, color='#000099', linewidth=1, label=pdb_ids[ens2])
+    ax1[0].fill_between(range(N-5), median_rsmd1, median_rsmd2, where=median_rsmd2 <= median_rsmd1, facecolor='#dddddd',
                         interpolate=True)
-    ax1[0].fill_between(range(95), median_rsmd1, median_rsmd2, where=median_rsmd2 >= median_rsmd1, facecolor='#dddddd',
+    ax1[0].fill_between(range(N-5), median_rsmd1, median_rsmd2, where=median_rsmd2 >= median_rsmd1, facecolor='#dddddd',
                         interpolate=True)
     ax1[0].set_ylabel('RSMD local score')
     ax1[0].legend()
 
-    ax1[1].plot(range(95), local_score1, color='black', linewidth=1)
+    ax1[1].plot(range(N-5), local_score1, color='black', linewidth=1)
 
-    ax2[0].plot(range(100), rasa2, color='#990000', linewidth=1, label=pdb_ids[ens1])
-    ax2[0].plot(range(100), rasa1, color='#000099', linewidth=1, label=pdb_ids[ens2])
-    ax2[0].fill_between(range(100), rasa1, rasa2, where=rasa2 <= rasa1, facecolor='#dddddd', interpolate=True)
-    ax2[0].fill_between(range(100), rasa1, rasa2, where=rasa2 >= rasa1, facecolor='#dddddd', interpolate=True)
+    ax2[0].plot(range(N), rasa2, color='#990000', linewidth=1, label=pdb_ids[ens1])
+    ax2[0].plot(range(N), rasa1, color='#000099', linewidth=1, label=pdb_ids[ens2])
+    ax2[0].fill_between(range(N), rasa1, rasa2, where=rasa2 <= rasa1, facecolor='#dddddd', interpolate=True)
+    ax2[0].fill_between(range(N), rasa1, rasa2, where=rasa2 >= rasa1, facecolor='#dddddd', interpolate=True)
     ax2[0].set_ylabel('Median rasa local score')
     ax2[0].legend()
 
-    ax2[1].plot(range(100), local_score2, color='black', linewidth=1)
+    ax2[1].plot(range(N), local_score2, color='black', linewidth=1)
 
-    ax3[0].plot(range(100), entropy2, color='#990000', linewidth=1, label=pdb_ids[ens1])
-    ax3[0].plot(range(100), entropy1, color='#000099', linewidth=1, label=pdb_ids[ens2])
-    ax3[0].fill_between(range(100), entropy1, entropy2, where=entropy2 <= entropy1, facecolor='#dddddd',
+    ax3[0].plot(range(N), entropy2, color='#990000', linewidth=1, label=pdb_ids[ens1])
+    ax3[0].plot(range(N), entropy1, color='#000099', linewidth=1, label=pdb_ids[ens2])
+    ax3[0].fill_between(range(N), entropy1, entropy2, where=entropy2 <= entropy1, facecolor='#dddddd',
                         interpolate=True)
-    ax3[0].fill_between(range(100), entropy1, entropy2, where=entropy2 >= entropy1, facecolor='#dddddd',
+    ax3[0].fill_between(range(N), entropy1, entropy2, where=entropy2 >= entropy1, facecolor='#dddddd',
                         interpolate=True)
     ax3[0].set_ylabel('SS entropy local score')
     ax3[0].legend()
 
-    ax3[1].plot(range(100), local_score3, color='black', linewidth=1)
+    ax3[1].plot(range(N), local_score3, color='black', linewidth=1)
     plt.tight_layout()
     plt.savefig("output/local_score_plot_{}-{}.png".format(pdb_ids[ens1], pdb_ids[ens2]))
 

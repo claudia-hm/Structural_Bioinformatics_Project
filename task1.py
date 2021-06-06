@@ -314,7 +314,7 @@ def create_pymol_image(reprentatives):
     for struct in structures_name:
         struct_string += " " + struct
 
-    for i in range(0, 100 - k):
+    for i in range(0, N - k):
         sum = 0
         for i in range(i, i + k):
             sum += variance[i]
@@ -336,7 +336,7 @@ def create_pymol_image(reprentatives):
     cmd.zoom(struct_string)
 
     logging.info("Getting variability for coloring")
-    features_var = get_variability(range(0, 199))
+    features_var = get_variability(range(0, M))
     norm = colors.Normalize(vmin=np.min(features_var), vmax=np.max(features_var))
     for i, residue in enumerate(Selection.unfold_entities(ensemble[0], "R")):
         rgb = cm.bwr(norm(features_var[i]))
