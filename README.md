@@ -31,6 +31,4 @@ These programs output the feature files inside the ```features``` folder and oth
 * ```--reset```: when present, the program cleans the content of the ```features``` and ```output``` folders, except those needed files for the execution.
 * ```-h```: help
 
-### Report 
-https://docs.google.com/document/d/1sXajmJBS4c28_oSMq_bLZYVMLse5mOQzaHyH4lh0vFQ/edit?usp=sharing
 
