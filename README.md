@@ -18,7 +18,7 @@ In this task, we identify the relationships inside a conformational ensemble. Fi
 ## Usage
 1. Download this repository 
 2. ```cd  Structural_Bioinformatics_Project```
-3. Load ensemble pdb files into ```data``` directory. The files must the original name from [PED](https://proteinensemble.org), e.g., ```PED00153e007.pdb````
+3. Load ensemble pdb files into ```data``` directory. The files must conserve the original name from [PED](https://proteinensemble.org), e.g., ```PED00153e007.pdb```
 4. Run ```task1.py``` providing as input the path to the PDB file: ```python task1.py pdb_file```, e.g,  ```python task1.py data/PED00153e007.pdb```
 5. Run ```task2.py``` providing as input the path to the feature files generated in Task 1: ```python task2.py feature_file_1 feature_file_2 ...```, e.g., ```python task2.py features/PED00153e007_single_conformation_features.json features/PED00153e008_single_conformation_features.json```
 6. Both python files output their results to the folders ```output```and ```features```folders. In addition, they can be called using the following flags:
