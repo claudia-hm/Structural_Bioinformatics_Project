@@ -13,7 +13,7 @@ The following python modules are required to execute the code:
 In this task, we identify the relationships inside a conformational ensemble. First, we calculate the single conformation features as described in the project requirements. Then, to perform clustering and generating a graph, we compute a ```(M,M)``` distance matrix for each of the features, where each cell is the feature distance between structure ```i```and structure ```j```in the ensemble. We combine these 4 matrices into a clustering distance matrix by taking the sum of squares of each feature matrix. Then, we perform clustering using the ```kmedoids```implementation of Biopython and later we identify the optimal number of clusters and hence, the conformational representatives using a technique based on the Elbow plot and inertia. Finally, we compute the pymol image by showing the cluster representatives and aligning them on the residues with less feature variance. Also we color the structures based on the feature variability within the whole ensemble.
 
 ### Task 2
-
+In this task 2, we will analyze the relationships between pairs of ensembles. Firs, we calculate the ensemble features as described in the project requirements. Then, we compute the global score applying the formula (4) Lazar et al., 2020 to obtain the *ens_RMS* between pair of ensembles. The output of this section is a global score heatmap between ensembles. Finally, we plot 3 different residue-based local scores: the difference between RSMD, between relative accessible surface area and secondary structure entropy.
 
 ## Usage
 1. Download this repository 
