@@ -17,7 +17,10 @@ In this task 2, we will analyze the relationships between pairs of ensembles. Fi
 
 More information and discussion available at the [Project Report](https://github.com/claudia-hm/Structural_Bioinformatics_Project/blob/main/SB%20Project%20Report.pdf).
 
-## Usage
+## Warning 
+These programs output the feature files inside the ```features``` folder and other required and complementary results in the ```output```. The code is not very fast. All features and matrices have been precomputed and they are automatically loaded if not existent in the ```features``` and  ```output``` folders. To visualize in real time the computations that are being performed is recommended the use of the flag ```--log_stdout``` (later explained). It is possible to force the recomputing of the files using the ```--reset``` flag.
+
+## Usage 
 1. Download this repository 
 2. ```cd  Structural_Bioinformatics_Project```
 3. Load ensemble pdb files into ```data``` directory. The files must conserve the original name from [PED](https://proteinensemble.org), e.g., ```PED00153e007.pdb```
