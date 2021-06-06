@@ -183,9 +183,6 @@ def get_distance_matrix_clustering():
 
     return dg, da, ds, dm
 
-def l2_distance(dg, da, ds, dm):
-    return np.square(dg ** 2 + da ** 2 + ds ** 2 + dm ** 2)
-
 def l1_distance(dg, da, ds, dm):
     return dg + da + ds + dm
 
@@ -314,6 +311,8 @@ def create_pymol_image(reprentatives):
     logging.info("Getting pymol representative structure names")
     for struct in reprentatives:
         structures_name.append("conf" + ('%04d' % (struct + 1)))
+    for struct in structures_name:
+        struct_string += " " + struct
 
     for i in range(0, 100 - k):
         sum = 0
@@ -333,7 +332,7 @@ def create_pymol_image(reprentatives):
         cmd.align(struct + " " + strIndx, structures_name[0]+ " " + strIndx)
 
     logging.info("Centering and zooming pymol image")
-    cmd.center(structures_name[0]+" "+strIndx)
+    cmd.center(structures_name[0])
     cmd.zoom(struct_string)
 
     logging.info("Getting variability for coloring")
@@ -344,7 +343,7 @@ def create_pymol_image(reprentatives):
         cmd.set_color("col_{}".format(i), list(rgb)[:3])
         cmd.color("col_{}".format(i), "resi {}".format(residue.id[1]))
     logging.info("Dumping pymol image")
-    cmd.png("output/{}_pymol_image.png".format(pdb_id))
+    cmd.png("output/{}_pymol_image.png".format(pdb_id), width=1000, height=1000)
 
 def main():
     global pdb_id, features, ensemble, N, M
@@ -381,7 +380,7 @@ def main():
     else:
         logging.info("Computing distance matrix for clustering")
         dg, da, ds, dm = get_distance_matrix_clustering()
-        distanceMatrix = l2_distance(dg, da, ds, dm)
+        distanceMatrix = l1_distance(dg, da, ds, dm)
 
         max = np.max(distanceMatrix)
         distanceMatrix = distanceMatrix / max
