@@ -15,6 +15,8 @@ In this task, we identify the relationships inside a conformational ensemble. Fi
 ### Task 2
 In this task 2, we will analyze the relationships between pairs of ensembles. Firs, we calculate the ensemble features as described in the project requirements. Then, we compute the global score applying the formula (4) Lazar et al., 2020 to obtain the *ens_RMS* between pair of ensembles. The output of this section is a global score heatmap between ensembles. Finally, we plot 3 different residue-based local scores: the difference between RSMD, between relative accessible surface area and secondary structure entropy.
 
+More information and discussion available at the [Project Report](https://github.com/claudia-hm/Structural_Bioinformatics_Project/blob/main/SB%20Project%20Report.pdf).
+
 ## Usage
 1. Download this repository 
 2. ```cd  Structural_Bioinformatics_Project```
@@ -29,51 +31,3 @@ In this task 2, we will analyze the relationships between pairs of ensembles. Fi
 ### Report 
 https://docs.google.com/document/d/1sXajmJBS4c28_oSMq_bLZYVMLse5mOQzaHyH4lh0vFQ/edit?usp=sharing
 
-<!---
-
-
-
-!pip install Bio
-!apt-get install dssp
-
-### Checklist
-This checklist refers to the python files task1.py, task2.p. Only mark as check when definitive working version is available in these python files.
-
-#### Task1
-- [x] a. Single conformation features
-  - [x] Radius of gyration of the structure
-  - [x] Relative accessible surface area (ASA) for each residue.
-  - [x] Secondary structure (SS) for each residue
-  - [x] Residue distance matrix considering Cα atoms
-- [x] b. Graph
-- [ ] c. Pymol image
-
-#### Task2
-- [x] a. Ensembles features
-  - [x] 1. Radius of gyration for each conformation in the ensemble.
-  - [x] 2. Secondary structure entropy for each position across ensemble conformations.
-  - [x] 3. Median solvent accessibility for each position across ensemble conformations.
-  - [x] 4. Median RMSD for each position across ensemble conformations
-  - [x] 5. Median distance of each pair of equivalent positions across ensemble conformations.
-  - [x] 6. Standard deviation of the distance of each pair of equivalent positions across ensemble
-conformations.
-- [x] b. Global score heatmap
-- [x] c. Plot showing features values along sequence positions
-
-### Commands for running py files
-
-#### Task 1
-python task1.py *pdb file*
-  
-For example:
-  
-python task1.py data/PED00153e010.pdb --log_stdout
-
-#### Task 2
-python task1.py *task1 feature files to compare*
-  
-For example:
-  
-python task2.py features/PED00153e007_single_conformation_features.json features/PED00153e008_single_conformation_features.json 
-features/PED00153e009_single_conformation_features.json features/PED00153e010_single_conformation_features.json features/PED00153e011_single_conformation_features.json  --log_stdout
--->
